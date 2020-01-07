@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Ameng</title>
+  
+  <subtitle>岛与睡莲</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://amenging.netlify.com/"/>
+  <updated>2019-05-22T12:51:38.001Z</updated>
+  <id>https://amenging.netlify.com/</id>
+  
+  <author>
+    <name>Ameng</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mongodb使用用户名密码登录</title>
+    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/mongodb-user-manage/"/>
+    <id>https://amenging.netlify.com/技术/mongodb-user-manage/</id>
+    <published>2019-03-27T02:42:17.000Z</published>
+    <updated>2019-05-22T12:51:38.001Z</updated>
+    
+    <content type="html"><![CDATA[<p>环境：<code>ubuntu</code></p><h1 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 选择admin数据库</span></span><br><span class="line">use admin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 插入数据</span></span><br><span class="line">db.createUser(&#123;</span><br><span class="line">  user: USERNAME,</span><br><span class="line">  <span class="built_in">pwd</span>: PASSWORD,</span><br><span class="line">  roles: [</span><br><span class="line">      &#123;role: ROLE, db: DBNAME&#125; <span class="comment"># DBNAME是希望授予权限的数据库</span></span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>role代表用户权限，常用的几个：</p><table><thead><tr><th>字段</th><th>描述</th></tr></thead><tbody><tr><td>read</td><td>可读当前数据库</td></tr><tr><td>readAnyDatabase</td><td>可以读所有数据库</td></tr><tr><td>readWrite</td><td>可以读写当前数据库</td></tr></tbody></table><p>更详细的在<a href="https://docs.mongodb.com/manual/reference/built-in-roles/#read" target="_blank" rel="noopener">官方文档</a></p><h1 id="修改配置信息"><a href="#修改配置信息" class="headerlink" title="修改配置信息"></a>修改配置信息</h1><p>打开<code>/etc/mongodb.conf</code>，我修改的配置如下<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">bind_ip</span> = <span class="number">127.0</span>.<span class="number">0.1</span> # 限制为本地访问</span><br><span class="line"><span class="attr">port</span> = <span class="number">50107</span> # 修改默认端口</span><br><span class="line"><span class="attr">auth</span> = <span class="literal">true</span> # 要求登录验证</span><br></pre></td></tr></table></figure></p><h1 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h1><p>首先关闭mongodb服务再从配置文件启动<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service mongodb stop <span class="comment"># 关闭</span></span><br><span class="line"></span><br><span class="line">nohup mongod --config /etc/mongod.config <span class="comment"># nohup表示后台启动</span></span><br></pre></td></tr></table></figure></p><p>再登录mongodb：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo 127.0.0.1:启动端口号</span><br></pre></td></tr></table></figure></p><p>现在输入<code>show dbs</code>会出现错误，错误信息类似<code>not authorized on admin to execute command</code><br>正确流程：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先选择admin数据库</span></span><br><span class="line">use admin</span><br><span class="line"><span class="comment"># 再登录</span></span><br><span class="line">db.auth(<span class="string">"USERNAME"</span>,<span class="string">"PASSWORD"</span>)</span><br><span class="line"><span class="comment"># 在选择有权限的数据库</span></span><br><span class="line">use DBNAME</span><br></pre></td></tr></table></figure></p><h1 id="node连接"><a href="#node连接" class="headerlink" title="node连接"></a>node连接</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MongoClient = <span class="built_in">require</span>(<span class="string">'mongodb'</span>).MongoClient</span><br><span class="line"><span class="comment">// 这里的authSources表示验证需要依赖的数据库名称</span></span><br><span class="line"><span class="comment">// 参考https://blog.csdn.net/szu_lzz/article/details/77435804</span></span><br><span class="line"><span class="keyword">var</span> url = <span class="string">'mongodb://用户名:密码@localhost:端口/数据库名称?authSource=admin'</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      mongodb用户管理和修改启动端口
+    
+    </summary>
+    
+      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="mongodb" scheme="https://amenging.netlify.com/tags/mongodb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ae解析摄像机第二步卡住问题</title>
+    <link href="https://amenging.netlify.com/%E5%85%B6%E5%AE%83/ae-solving-camera/"/>
+    <id>https://amenging.netlify.com/其它/ae-solving-camera/</id>
+    <published>2018-10-23T06:59:52.000Z</published>
+    <updated>2019-05-22T12:51:37.996Z</updated>
+    
+    <content type="html"><![CDATA[<p>选择跟在摄像机后在<code>效果控件</code>窗口选择<code>高级</code>，勾上<code>详细分析</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;选择跟在摄像机后在&lt;code&gt;效果控件&lt;/code&gt;窗口选择&lt;code&gt;高级&lt;/code&gt;，勾上&lt;code&gt;详细分析&lt;/code&gt;&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="其它" scheme="https://amenging.netlify.com/categories/%E5%85%B6%E5%AE%83/"/>
+    
+    
+      <category term="ae" scheme="https://amenging.netlify.com/tags/ae/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>快捷键映射</title>
+    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/capstoesc/"/>
+    <id>https://amenging.netlify.com/技术/capstoesc/</id>
+    <published>2018-09-20T12:19:52.000Z</published>
+    <updated>2019-05-22T12:51:37.997Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><blockquote><p>环境：Win10<br>使用AutoHotkey</p></blockquote><h3 id="创建脚本"><a href="#创建脚本" class="headerlink" title="创建脚本"></a>创建脚本</h3><p>新建文件<code>maps.ahk</code><br>输入<code>CAPSLOCK::esc</code></p><h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>选择<code>AutoHotkey</code>安装目录下的<code>Compiler/Ahk2Exe.exe</code>，其中<code>Source</code>选项选择<code>maps.ahk</code>，然后点击<code>Convert</code>，在<code>maps.ahk</code>同目录下会生成<code>maps.exe</code>， 运行<code>maps.exe</code>即可</p><h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><blockquote><p>环境：ubuntu 14<br>原文来自：<a href="http://vim.wikia.com/wiki/Map_caps_lock_to_escape_in_XWindows" target="_blank" rel="noopener">http://vim.wikia.com/wiki/Map_caps_lock_to_escape_in_XWindows</a></p></blockquote><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>在<code>home</code>目录下新建文件<code>.speedswapper</code>，输入：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">! Swap caps lock and escape</span><br><span class="line">remove Lock = Caps_Lock</span><br><span class="line">keysym Escape = Caps_Lock</span><br><span class="line">keysym Caps_Lock = Escape</span><br><span class="line">add Lock = Caps_Lock</span><br></pre></td></tr></table></figure></p><p>运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ xmodmap .speedswapper</span><br></pre></td></tr></table></figure></p><p>用vim编辑文件，会发现CapsLock和ESC键的功能已经调换了。<br><!-- ### 持久化运行命令后如果重启系统，Caps和esc的功能又回到了原点。如果希望能保持这个功能，就要开机启动这个脚本。我的实现：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /etc/init/changekey.conf</span><br></pre></td></tr></table></figure></p><p>文件内容输入<code>xmodmap /home/.speedswapper</code>，这时候重启就不会失效啦 –&gt;</p>--></p>]]></content>
+    
+    <summary type="html">
+    
+      因为vim编辑时按esc不方便，就想把CapsLock映射成esc，网上找了一些方法也自己尝试了一下，总结了一下
+    
+    </summary>
+    
+      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="vim" scheme="https://amenging.netlify.com/tags/vim/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>兴趣使然的TODO应用</title>
+    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/todo/"/>
+    <id>https://amenging.netlify.com/技术/todo/</id>
+    <published>2018-08-23T04:26:53.000Z</published>
+    <updated>2019-05-22T12:51:38.002Z</updated>
+    
+    <content type="html"><![CDATA[<p>项目github：<a href="https://github.com/amenging/php-vue-todo" target="_blank" rel="noopener">https://github.com/amenging/php-vue-todo</a><br>线上地址：<a href="ameng.gz01.bdysite.com">TODO</a></p><p>预览图：<br><img src="http://wx2.sinaimg.cn/mw690/005QPjztgy1fujr7obqbdj310w0jrq3a.jpg" alt="电脑版"><br><img src="http://wx3.sinaimg.cn/mw690/005QPjztgy1fujr99aci8j308k0f8wef.jpg" alt="手机版"></p><h2 id="实现功能"><a href="#实现功能" class="headerlink" title="实现功能"></a>实现功能</h2><ul><li style="list-style: none"><input type="checkbox" checked> 登录注册</li><li style="list-style: none"><input type="checkbox" checked> 增删改</li><li style="list-style: none"><input type="checkbox" checked> 仅本地储存(localStorage)</li><li style="list-style: none"><input type="checkbox" checked> 导入导出</li></ul><h2 id="食用说明"><a href="#食用说明" class="headerlink" title="食用说明"></a>食用说明</h2><h3 id="不同步到云端功能"><a href="#不同步到云端功能" class="headerlink" title="不同步到云端功能"></a>不同步到云端功能</h3><p>一般用于：</p><ul><li>不想同步到云端数据库的清单<br>注：重要数据及时导出备份和删除</li></ul><h3 id="导入导出功能"><a href="#导入导出功能" class="headerlink" title="导入导出功能"></a>导入导出功能</h3><p>一般用于：</p><ul><li>未同步到云端的清单在不同平台上的迁移；</li><li>重要数据的备份（考虑到主机可能没法续费了..之类的）<br>注：导出到本地的清单再导入时默认不同步云端</li></ul><h2 id="为什么要做这个项目"><a href="#为什么要做这个项目" class="headerlink" title="为什么要做这个项目"></a>为什么要做这个项目</h2><p>做这个项目主要有两个原因，其一是要做的事太多需要整理一下，找了一些事件清单用起来总有点不爽，本来就是希望简洁一点随时记录，其二是因为学完了vue一直没有一个自己的项目，想练练手，所以决定自己倒腾一个。<br>后台为什么用php？当然是因为<del>php是世界上最……</del>其实是因为太穷了买不起服务器就买了个php主机_(:з」∠)_</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul><li>做项目的过程中，首先是复习了一下vue，组件这块还拆得不太好，感觉还是要做好项目的规划啊，目前还比较随心，很多东西就是做的时候才会去想</li><li>时间大部分都花在折腾后台和数据上了，首先并不会php，mysql也忘得差不多了，在做的过程中又重新学了一下，虽然用的都是一些基础的东西，不过对于这么一个小工具还是够啦</li><li>在做的过程中接触了mock.js和yapi，很好用的接口管理工具(<em>/ω＼</em>)</li></ul><p>记录一些用到的东西~</p><h3 id="php"><a href="#php" class="headerlink" title="php"></a>php</h3><ul><li><p>判断sql语句返回值是否为空</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$sql = mysqli_query($conn, $getList);</span><br><span class="line">if (mysqli_num_rows($sql) &gt; 0) &#123;&#125; // 统计查询返回的行数</span><br></pre></td></tr></table></figure></li><li><p>字符串和json的转换</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// json转字符串</span></span><br><span class="line"><span class="keyword">echo</span>( json_encode(<span class="keyword">array</span>(<span class="string">"name"</span> =&gt; <span class="string">"abc"</span>, <span class="string">"age"</span> =&gt; <span class="number">12</span>)) );</span><br><span class="line"><span class="comment">// '&#123;"name":"abc","age":12&#125;'</span></span><br><span class="line"><span class="comment">// 字符串转json</span></span><br><span class="line"><span class="comment">// 默认返回对象，设置第二个参数为true则返回数组</span></span><br><span class="line">var_dump( json_decode(<span class="string">'&#123;"name":"abc","age":12&#125;'</span>) ); </span><br><span class="line"><span class="comment">// object(stdClass)#1 (2) &#123; ["name"]=&gt; string(3) "abc" ["age"]=&gt; int(12) &#125;</span></span><br></pre></td></tr></table></figure></li><li><p>文件操作</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 打开文件</span></span><br><span class="line"><span class="comment">// 以写入模式打开filename.txt文件</span></span><br><span class="line"><span class="comment">// w为mode参数，表示写入方式打开，将文件指针指向文件头并将文件大小截为零，文件不存在则创建</span></span><br><span class="line">$myfile = fopen(<span class="string">'filename.txt'</span>, <span class="string">'w'</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">'打开文件失败'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写入文件</span></span><br><span class="line"><span class="comment">// 将SOMEDATA写入到filename.txt文件</span></span><br><span class="line">fwrite(<span class="string">'filename.txt'</span>, SOMEDATA);</span><br></pre></td></tr></table></figure></li><li><p>密码验证</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加密</span></span><br><span class="line">$hash = password_hash(密码, PASSWORD_DEFAULT);</span><br><span class="line"><span class="comment">// 注意储存密码时字段长度要设置至少为60</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 验证</span></span><br><span class="line">password_verify(密码, $hash);</span><br></pre></td></tr></table></figure></li><li><p>php输入流</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取POST参数</span></span><br><span class="line"><span class="comment">// php5.6使用POST报错，提示用php://input</span></span><br><span class="line">$data = file_get_contents(<span class="string">"php://input"</span>);</span><br></pre></td></tr></table></figure></li><li><p>cookie</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置cookie</span></span><br><span class="line">setcookie(key, value);</span><br><span class="line"><span class="comment">// 取消cookie</span></span><br><span class="line">setcookie(<span class="string">"username"</span>, <span class="string">""</span>, time() - <span class="number">1</span>);</span><br></pre></td></tr></table></figure></li></ul><h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h3><ul><li><p>执行多条插入语句</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">table</span> (column1, column2) <span class="keyword">VALUES</span> (value1, value2), (value1 ,value2);</span><br></pre></td></tr></table></figure></li><li><p>字段最大长度问题<br>// 我使用的mysql是5.5.53，最大大小为65535字节， 我的表结构为：</p></li></ul><hr><table><thead><tr><th></th><th>Field</th><th>Type</th><th>Null</th><th>Key</th><th>Default</th><th>Extra</th></tr></thead><tbody><tr><td></td><td>items_id</td><td>int(11)</td><td>NO</td><td>PRI</td><td>NULL</td><td>auto_increment</td><td></td></tr><tr><td></td><td>content</td><td>varchar(21840)</td><td>YES</td><td></td><td>NULL</td><td></td><td></td></tr><tr><td></td><td>status</td><td>int(2)</td><td>YES</td><td></td><td>NULL</td><td></td><td></td></tr><tr><td></td><td>list_id</td><td>int(11)</td><td>YES</td><td></td><td>NULL</td><td></td><td></td></tr></tbody></table><hr><p>计算结果为(65535-4*3-2-1)/3 = 21480<br>其中：4为<code>int</code>类型所占字节，2为占位标志，1为null标志位所占字节，字符类型为utf8，所以最后除以3。<br><code>计算规则</code>请看这位大大的博客：<a href="http://www.cnblogs.com/gomysql/p/3615897.html" target="_blank" rel="noopener">http://www.cnblogs.com/gomysql/p/3615897.html</a><br>注：int类型后面的数字不代表字节长度，代表显示的位数，int占4字节</p>]]></content>
+    
+    <summary type="html">
+    
+      简单的TODO应用
+    
+    </summary>
+    
+      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="vue" scheme="https://amenging.netlify.com/tags/vue/"/>
+    
+      <category term="php" scheme="https://amenging.netlify.com/tags/php/"/>
+    
+      <category term="mysql" scheme="https://amenging.netlify.com/tags/mysql/"/>
+    
+      <category term="todo" scheme="https://amenging.netlify.com/tags/todo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ftp相关问题</title>
+    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/ftp/"/>
+    <id>https://amenging.netlify.com/技术/ftp/</id>
+    <published>2018-08-16T01:27:48.000Z</published>
+    <updated>2019-05-22T12:51:37.998Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="错误一"><a href="#错误一" class="headerlink" title="错误一"></a>错误一</h3><p>打开FTP服务器上的文件夹时发生错误。请检查是否有权限访问该文件夹 550 No such file or directory</p><p>错误原因：<br>复制的时候全选把.git文件选上了，文件路径太深。</p><h3 id="错误二"><a href="#错误二" class="headerlink" title="错误二"></a>错误二</h3><p>FillZilla连接失败，响应:220</p><p>错误原因：主机不支持FTP over TLS连接。<br>解决方式：在站点管理器将<code>加密</code>改为’只使用普通FTP（不安全）’即可</p>]]></content>
+    
+    <summary type="html">
+    
+      ftp相关
+    
+    </summary>
+    
+      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="ftp" scheme="https://amenging.netlify.com/tags/ftp/"/>
+    
+      <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>谷歌浏览器workspace</title>
+    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/workspace/"/>
+    <id>https://amenging.netlify.com/技术/workspace/</id>
+    <published>2018-08-11T07:01:55.000Z</published>
+    <updated>2019-05-22T12:51:38.003Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前在写代码的时候，看见控制台右侧某个文件有一个小绿点，小东西长得真别致😳<br><img src="http://wx1.sinaimg.cn/mw690/005QPjztgy1fu5s9ogsa4j30ab066a9y.jpg" alt=""><br>然后我发现在控制台修改样式的时候，本地文件也会跟着改变，这么神奇的吗？打开百度就去搜……诶等等这东西怎么称呼？小绿点？emmm…没找到是啥，今天突然想起来，谷歌了一下，终于被我找到了（才没有在黑度娘）(ー`´ー)</p><p>官方教程：<a href="https://developers.google.com/web/tools/setup/setup-workflow?hl=zh-cn" target="_blank" rel="noopener">https://developers.google.com/web/tools/setup/setup-workflow?hl=zh-cn</a><br>但不知道是系统版原因还是浏览器版本原因，跟我本地的有些不适用，所以这里记录一下。<br>打开控制台，找到<code>Sources</code>，然后选择FileSystem，点击add就可以添加文件夹了，从此就可以轻轻松松修改样式了~<br><img src="http://wx2.sinaimg.cn/mw690/005QPjztgy1fu5rzo0wp5j30kb040a9w.jpg" alt=""><br>注：对DOM不生效</p>]]></content>
+    
+    <summary type="html">
+    
+      修改样式的时候在控制台和编辑器之间切换很麻烦？workspace了解一下
+    
+    </summary>
+    
+      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="chrome" scheme="https://amenging.netlify.com/tags/chrome/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>xx-net使用记录</title>
+    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/xx-net/"/>
+    <id>https://amenging.netlify.com/技术/xx-net/</id>
+    <published>2018-08-01T01:25:30.000Z</published>
+    <updated>2019-05-22T12:51:38.003Z</updated>
+    
+    <content type="html"><![CDATA[<p>项目github地址：<a href="https://github.com/XX-net/XX-Net/" target="_blank" rel="noopener">https://github.com/XX-net/XX-Net/</a><br>官方的比较详细，这里就是一个简单的记录_(:з」∠)_</p><p>开始之前：<br>windows检测自己电脑是否支持ipv6：命令行输入<code>netsh int ipv6 show teredo</code>看状态是不是qualified<br>如果你的电脑不支持ipv6，可以参考官方WIKI：<a href="https://github.com/XX-net/XX-Net/wiki/How-to-turn-on-IPv6" target="_blank" rel="noopener">https://github.com/XX-net/XX-Net/wiki/How-to-turn-on-IPv6</a><br>(我自己电脑win7折腾好几遍没什么卵用)<br>linux请看：<a href="https://www.linuxidc.com/Linux/2013-03/80479.htm" target="_blank" rel="noopener">https://www.linuxidc.com/Linux/2013-03/80479.htm</a></p><blockquote><p>环境:<br>    win10<br>    XX-Net-3.12.10</p></blockquote><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载：<br>    官方下载页面：<a href="https://github.com/XX-net/XX-Net/blob/master/code/default/download.md" target="_blank" rel="noopener">https://github.com/XX-net/XX-Net/blob/master/code/default/download.md</a><br>    百度网盘：链接：<a href="https://pan.baidu.com/s/1TSqHS4uvs0ZuyjU_fOSiHw" target="_blank" rel="noopener">https://pan.baidu.com/s/1TSqHS4uvs0ZuyjU_fOSiHw</a> 密码：sagj</p><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>下载好运行start.bat脚本就可以用了</p><h3 id="关于证书"><a href="#关于证书" class="headerlink" title="关于证书"></a>关于证书</h3><!-- 证书在``data\gae_proxy``目录下 --><p>官方说明：</p><blockquote><p>GoAgent对https网站，是通过GAE服务获取到内容，再重新加密返回浏览器的。<br>因此https的证书必须重新生成。</p></blockquote><p>浏览器打开<code>http://127.0.0.1:8085</code>就可以看到状态<br>其中有GAEPROXY和X-TUNNEL，GAEPROXY可以部署自己的app-id</p><h3 id="Google的app-id"><a href="#Google的app-id" class="headerlink" title="Google的app-id"></a>Google的app-id</h3><p>官方WIKI：<a href="https://github.com/XX-net/XX-Net/wiki/how-to-create-my-appids" target="_blank" rel="noopener">https://github.com/XX-net/XX-Net/wiki/how-to-create-my-appids</a><br>步骤：</p><ul><li>首先要有谷歌账号</li><li>打开<a href="https://console.cloud.google.com/start" target="_blank" rel="noopener">https://console.cloud.google.com/start</a> ，点击选择项目，然后点击创建项目</li><li>输入项目名称</li><li>在左边菜单栏找到App引擎，选择子菜单的信息中心</li><li>语言选择Python</li><li>区域默认即可</li><li>等待初始化完成，选择XX-Net窗口的部署服务端，并填写app-id</li><li>在弹窗中点击allow</li><li>等待部署完成<br>注：一个app-id每天1G流量</li></ul><h3 id="X-TUNNEL"><a href="#X-TUNNEL" class="headerlink" title="X-TUNNEL"></a>X-TUNNEL</h3><p>X-TUNNEL更加安全，可以购买流量套餐，$4.5三个月300G，我的根本用不完岂可修(ー`´ー)<br>qq、163什么的邮箱不行哦，注册个Gmail就ok</p><h3 id="SwitchyOmega"><a href="#SwitchyOmega" class="headerlink" title="SwitchyOmega"></a>SwitchyOmega</h3><p>用SwitchyOmega为不同网站选择代理规则</p><p>谷歌插件在下载的文件夹SwitchyOmega/目录内，将.crx文件拖到浏览器的扩展程序即可，安装成功后在右上角有图标，对于不需要代理的网站可以选择直接连接</p><p><img src="http://wx3.sinaimg.cn/mw690/005QPjztgy1ftuebcipy8j305d0cvaa1.jpg" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      简单记录爬墙过程
+    
+    </summary>
+    
+      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="xx-net" scheme="https://amenging.netlify.com/tags/xx-net/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>js相关</title>
+    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/js-pieces/"/>
+    <id>https://amenging.netlify.com/技术/js-pieces/</id>
+    <published>2018-07-31T12:32:37.000Z</published>
+    <updated>2019-05-22T12:51:38.001Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="中缀表达式转逆波兰式"><a href="#中缀表达式转逆波兰式" class="headerlink" title="中缀表达式转逆波兰式"></a>中缀表达式转逆波兰式</h2><p>实现过程：</p><p>1.首先创建两个空数组，result用来存放结果，temp用来存放符号；再创建一个符号集ops存放+-*/符号</p><p>2.转表达式字符为数组，开始遍历数组</p><p>3.如果遇到运算符，直接推入结果数组</p><p>4.遇到括号</p><p>　　1）遇到’(‘，推入暂存区</p><p>　　2）遇到’)’，依次弹出暂存区栈顶运算符直到’(‘，并且删除暂存区的’(‘</p><p>5.遇到运算符</p><p>　　1）如果暂存区</p><p>　　　　①为空</p><p>　　　　②暂存区栈顶为’(‘</p><p>　　　　③当前符号的优先级高于暂存区栈顶运算符</p><p>　　　　这几种情况直接推入栈内</p><p>　　2）否则，将暂存区栈顶运算符弹出并推入结果区，再次进行步骤5</p><p>6.遍历完成则将暂存区剩余运算符依次弹出并推入结果区</p><p>代码链接<br><a href="https://codepen.io/amenging/pen/djdvqR?editors=1111" target="_blank" rel="noopener">https://codepen.io/amenging/pen/djdvqR?editors=1111</a></p>]]></content>
+    
+    <summary type="html">
+    
+      一些js笔记（持续更）
+    
+    </summary>
+    
+      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="javascript" scheme="https://amenging.netlify.com/tags/javascript/"/>
+    
+      <category term="前端" scheme="https://amenging.netlify.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>css笔记</title>
+    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/css-skill/"/>
+    <id>https://amenging.netlify.com/技术/css-skill/</id>
+    <published>2018-07-30T08:59:23.000Z</published>
+    <updated>2019-05-22T12:51:37.997Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="background绘图区域"><a href="#background绘图区域" class="headerlink" title="background绘图区域"></a>background绘图区域</h2><p>  在线地址：<a href="https://codepen.io/amenging/pen/ajEmwm" target="_blank" rel="noopener">https://codepen.io/amenging/pen/ajEmwm</a><br>  可以看到div1和div2的背景绘图区域不一样，div1是默认的样式，而div2的背景区域明显可以看到是从padding-box开始绘制的，他们的区别就在于background-repeat属性值不同。<br>  要解释这个问题，首先介绍一下几个属性：</p><blockquote><p>background-clip，默认值：border-box<br>background-origin，默认值：padding-box<br>background-repeat，默认值：repeat</p></blockquote><p>  关于background-repeat，文档中有这样一句：</p><blockquote><p>The image is repeated in this direction as often as needed to cover the background painting area.</p></blockquote><p>  另外：<br>    background-origin决定绘图位置(background position area)，background-clip决定绘图区域(background painting area)<br>  所以div1和div2表现不一样的原因在于div1的background-repeat属性为repeat时，的绘图区域从border-box开始</p><h2 id="绘制指示箭头"><a href="#绘制指示箭头" class="headerlink" title="绘制指示箭头"></a>绘制指示箭头</h2><p>在线地址：<a href="https://codepen.io/amenging/pen/KBZaBx" target="_blank" rel="noopener">https://codepen.io/amenging/pen/KBZaBx</a><br>效果图：<img src="https://s1.ax1x.com/2018/08/28/POCWX4.png" alt=""></p><h2 id="绘制菜单图标"><a href="#绘制菜单图标" class="headerlink" title="绘制菜单图标"></a>绘制菜单图标</h2><p>三条线构成的菜单，鼠标放上去时显示x号<br>在线地址：<a href="https://codepen.io/amenging/pen/XBVpyL" target="_blank" rel="noopener">https://codepen.io/amenging/pen/XBVpyL</a><br>效果图：<img src="http://wx4.sinaimg.cn/mw690/005QPjztgy1fts4h6k7ytg301o01o744.gif" alt=""></p><h2 id="绘制心形"><a href="#绘制心形" class="headerlink" title="绘制心形"></a>绘制心形</h2><p>在线地址：<a href="https://codepen.io/amenging/pen/yxJMpP" target="_blank" rel="noopener">https://codepen.io/amenging/pen/yxJMpP</a><br>效果图：<img src="https://s1.ax1x.com/2018/08/28/PO91iV.png" alt=""></p><h2 id="标签卡片"><a href="#标签卡片" class="headerlink" title="标签卡片"></a>标签卡片</h2><p>在线地址：<a href="https://codepen.io/amenging/pen/EeyWqJ" target="_blank" rel="noopener">https://codepen.io/amenging/pen/EeyWqJ</a><br>效果图：<img src="https://s1.ax1x.com/2018/08/28/PO9fot.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      一些css笔记（持续更）
+    
+    </summary>
+    
+      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="前端" scheme="https://amenging.netlify.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="css" scheme="https://amenging.netlify.com/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ubuntu虚拟机端口映射</title>
+    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/port/"/>
+    <id>https://amenging.netlify.com/技术/port/</id>
+    <published>2018-07-30T08:37:19.000Z</published>
+    <updated>2019-05-22T12:51:38.002Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.cnblogs.com/amenging/p/8358649.html" target="_blank" rel="noopener">老物搬运有修改</a></p><p>环境：</p><blockquote><p>ubuntu 14.04.1<br>mongodb v3.4.1<br>虚拟机连接模式为nat连接<br>已安装node环境</p></blockquote><h2 id="一、mongodb启动问题"><a href="#一、mongodb启动问题" class="headerlink" title="一、mongodb启动问题"></a>一、mongodb启动问题</h2><p><img src="http://wx2.sinaimg.cn/mw690/005QPjztgy1fttxoljeq9j30jm02e3yk.jpg" alt=""><br>错误原因：<br>因为mongodb默认的dbpath是/data/db，这个目录只能用root用户创建，创建后在权限上也比较麻烦，所以换个目录 <code>sudo mongod --dbpath /var/lib/mongodb/data/db</code><br><img src="http://wx4.sinaimg.cn/mw690/005QPjztgy1fttxolz79oj30ez00hmwz.jpg" alt=""><br>如果启动失败可能是在/var/lib/mongodb/或者/var/lib/mongodb/data/db/下有.lock文件，用root用户删掉就好，启动成功可以在进程看到：<br><img src="http://wx3.sinaimg.cn/mw690/005QPjztgy1fttxomc5jpj30sd01xwep.jpg" alt=""></p><h2 id="二、端口映射"><a href="#二、端口映射" class="headerlink" title="二、端口映射"></a>二、端口映射</h2><p>mongodb启动成功后运行node项目，我这边端口为3003<br>使用<a href="http://man.linuxde.net/iptables" target="_blank" rel="noopener">iptables</a>命令进行端口映射<br><code>sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3003</code></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-t：选择要操作的表</span><br><span class="line">-A：添加规则名字，PREROUTING用于目标地址转换</span><br><span class="line">-p：指定要匹配的数据包类型</span><br><span class="line">--dport：请求的端口</span><br><span class="line">-j：动作，REDIRECT表示重定向、映射、透明代理</span><br><span class="line">--to-port：要转到的端口</span><br></pre></td></tr></table></figure><p>添加成功后使用 sudo iptables -t nat -L 查看<br><img src="http://wx1.sinaimg.cn/mw690/005QPjztgy1fttxtx0xjrj30mw064gm2.jpg" alt=""></p><p>我本地主机是win7，在hosts文件添加一条解析（直接用ip也能访问）<br><img src="http://wx1.sinaimg.cn/mw690/005QPjztgy1fttxonuo3cj30960140sh.jpg" alt=""></p><p>本地浏览器输入<code>www.ubuntu.ameng.com</code>即可访问<br><img src="http://wx1.sinaimg.cn/mw690/005QPjztgy1fttxoo8xlgj30y80650sk.jpg" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      来做端口映射吧~
+    
+    </summary>
+    
+      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="mongodb" scheme="https://amenging.netlify.com/tags/mongodb/"/>
+    
+      <category term="ubuntu" scheme="https://amenging.netlify.com/tags/ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git多用户管理</title>
+    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/gitusers/"/>
+    <id>https://amenging.netlify.com/技术/gitusers/</id>
+    <published>2018-07-30T08:01:25.000Z</published>
+    <updated>2019-05-22T12:51:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.cnblogs.com/amenging/p/7944504.html" target="_blank" rel="noopener">[老物搬运有修改]</a></p><p>环境: <code>win7 + gitbash</code></p><blockquote><p>有时候在工作和学习时我们有不同的github账户，可能不同项目还有不同的ssh key，或者既有github账户又有码云账户以及自己的gitblit账户，比如我有两个github两个码云以及一个gitblit，一个ssh key怎么够啊摔，所以不同账户的key要好好管理，从本地跑去提交的时候才不会迷路ヽ(￣▽￣)ﾉ</p></blockquote><h2 id="生成ssh-key"><a href="#生成ssh-key" class="headerlink" title="生成ssh-key"></a>生成ssh-key</h2><p>在git-bash输入<code>ssh-keygen -t rsa -C &#39;用户邮箱&#39;</code><br>为了便于管理，<code>Enter file in which to save the key</code>最好输入存放key的文件名称，如<code>/c/Users/你的用户名/.ssh/ssh-test</code>，然后enter到最后就可以了~<br><img src="http://wx4.sinaimg.cn/mw690/005QPjztgy1fu5hyvtnsmj30fo08lt8p.jpg" alt=""><br>注：如果没有输入目录则生成的文件在命令行运行的目录下，默认名称<code>id_rsa</code>，建议将key统一放在<code>C:\Users\你的用户名\.ssh</code>目录下<br>生成之后在目录下可以看到：<br><img src="http://wx3.sinaimg.cn/mw690/005QPjztgy1fu5hw15hzdj30gy01ajr6.jpg" alt=""></p><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>编辑<code>.ssh</code>目录下的<code>config</code>文件（没有则创建），格式如下；<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host 别名（如github1）</span><br><span class="line">User 用户名</span><br><span class="line">Hostname github.com（这里才是真正的主机名）</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile 存放公钥的文件（如~<span class="regexp">/.ssh/i</span>d_rsa）</span><br><span class="line">IdentitiesOnly yes</span><br></pre></td></tr></table></figure></p><p>重点来了，本地项目下的<code>.git/config</code>文件中的<strong>remote地址</strong>一定要<strong>跟config文件中的别名</strong>对应！</p><p>以github的ssh地址为例：<br>Host为<code>github001</code>，那么remote地址就为<code>git@github001:你的用户名/你的项目地址</code></p><p>下图左边是我的ssh config配置，右边是两个项目的.git/config配置，可以看到url和host别名是一一对应的(第一个是github，第二个是gitblit)<br><img src="http://wx4.sinaimg.cn/mw690/005QPjztgy1fts32rt2swj30rw0apdgv.jpg" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      有时候在工作和学习时我们有不同的github账户，可能不同项目还有不同的ssh key，或者既有github账户又有码云账户以及自己的gitblit账户，比如我有两个github两个码云以及一个gitblit，一个ssh key怎么够啊摔，所以不同账户的key要好好管理，提交的时候才不会迷路ヽ(￣▽￣)ﾉ
+    
+    </summary>
+    
+      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="git" scheme="https://amenging.netlify.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>windows环境下搭建gitblit</title>
+    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/gitblit/"/>
+    <id>https://amenging.netlify.com/技术/gitblit/</id>
+    <published>2018-07-30T08:01:25.000Z</published>
+    <updated>2019-05-22T12:51:37.999Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.cnblogs.com/amenging/p/7944504.html" target="_blank" rel="noopener">[老物搬运有修改]</a></p><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="下载java1-8-1"><a href="#下载java1-8-1" class="headerlink" title="下载java1.8.1"></a>下载java1.8.1</h3><p><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p><p>先装了java9，启动gitblit.cmd报错，又换成了1.8.1的jdk， 报错如下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java.lang.ClassCastException: java.base/jdk.internal.loader.ClassLoaders<span class="variable">$AppClassLoader</span> cannot be cast to java.base/java.net.URLClassLoader</span><br><span class="line">at org.moxie.MxLauncher.addJarFile(MxLauncher.java:170)</span><br><span class="line">at org.moxie.MxLauncher.main(MxLauncher.java:117)</span><br></pre></td></tr></table></figure><h3 id="下载gitblit（1-8-0）"><a href="#下载gitblit（1-8-0）" class="headerlink" title="下载gitblit（1.8.0）"></a>下载gitblit（1.8.0）</h3><p><a href="http://gitblit.com/" target="_blank" rel="noopener">http://gitblit.com/</a></p><h3 id="配置java环境变量"><a href="#配置java环境变量" class="headerlink" title="配置java环境变量"></a>配置java环境变量</h3><p>这个网上很多就不写啦， 配置好后命令行运行<code>java</code>和<code>javac</code>都可以就没问题啦</p><h2 id="配置运行"><a href="#配置运行" class="headerlink" title="配置运行"></a>配置运行</h2><h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>配置文件在gitblit安装目录下：<code>data/defaults.propoerties</code>，参考<a href="http://blog.csdn.net/hbtflying/article/details/52318691?locationNum=14" target="_blank" rel="noopener">这篇博客</a></p><p>主要修改的是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git.repositoriesFolder = git仓库目录(如d:<span class="regexp">/githubFolder)</span></span><br><span class="line"><span class="regexp">server.httpPort = http协议端口号</span></span><br><span class="line"><span class="regexp">server.httpBindInterface = 服务器ip地址</span></span><br></pre></td></tr></table></figure></p><h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>启动gitblit目录下的gitblit.cmd即可运行，运行installService.cmd可将gitblit作为Windows服务启动；</p><p>如果运行错误，建议运行目录下gitblit-stop.cmd停止后再重启；</p><p>启动后在浏览器输入服务器ip和http端口可访问，默认用户名admin，密码admin：</p><p><img src="http://wx3.sinaimg.cn/mw690/005QPjztgy1fts2yz3o5tj30vv036q2v.jpg" alt=""></p><h3 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h3><p><img src="http://wx1.sinaimg.cn/mw690/005QPjztgy1fts2xnavvxj305808oglf.jpg" alt="创建版本库"></p><p>创建好之后可以看到可以用ssh也可以用http：</p><p><img src="http://wx2.sinaimg.cn/mw690/005QPjztgy1fts2xnlrozj30gl08ujrs.jpg" alt=""></p><h3 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h3><p>通过用户中心添加ssh key：<br><img src="http://wx1.sinaimg.cn/mw690/005QPjztgy1fts31jt4i2j30ht0f50t1.jpg" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      从零开始的gitblit服务器
+    
+    </summary>
+    
+      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="gitblit" scheme="https://amenging.netlify.com/tags/gitblit/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo搭建博客过程记录</title>
+    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/hexo/"/>
+    <id>https://amenging.netlify.com/技术/hexo/</id>
+    <published>2018-07-10T11:58:45.000Z</published>
+    <updated>2019-05-22T12:51:38.001Z</updated>
+    
+    <content type="html"><![CDATA[<p>官方文档：<a href="https://hexo.io/zh-cn/docs" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs</a></p><h2 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h2><ul><li>安装node和git环境</li><li>安装hexo<br><code>npm install -g hexo-cli</code></li><li>初始化<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;folder&gt;</span><br><span class="line">cd &lt;folder&gt;</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></li></ul><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config.yml</span></span><br><span class="line">deploy:</span><br><span class="line">    type: git</span><br><span class="line">     <span class="comment">#括号里面换成自己的用户名和仓库名,去掉括号</span></span><br><span class="line">    repo: git@github.com:(BoView)/(BoView).github.io.git</span><br><span class="line">    branch: master</span><br></pre></td></tr></table></figure><h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo -g</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure><h3 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h3><p>hexo -d</p><h3 id="域名配置"><a href="#域名配置" class="headerlink" title="域名配置"></a>域名配置</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用的万网域名</span></span><br><span class="line"><span class="comment">// 域名下添加解析记录类型为 CNAME </span></span><br><span class="line"><span class="comment">// 主机记录为@ </span></span><br><span class="line"><span class="comment">// 线路选择默认</span></span><br><span class="line"><span class="comment">// 记录值为github的仓库名userName.github.io</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// 在hexo项目目录下添加CNAME文件，添加域名</span></span><br><span class="line"><span class="comment">// 重新部署</span></span><br><span class="line"></span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure><p>中间遇到github pages报错，原因是没有把CNAME文件放到source目录下，生成之后github上没有这个文件。<br><img src="/img/2018-07-11_172026.png" alt=""></p><h3 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h3><p>来自<a href="https://www.haomwei.com/technology/maupassant-hexo.html" target="_blank" rel="noopener">这篇博客</a>， 页面字体及一些细节借鉴了<a href="https://imjad.cn" target="_blank" rel="noopener">这里</a></p><h2 id="编辑文章"><a href="#编辑文章" class="headerlink" title="编辑文章"></a>编辑文章</h2><ul><li>新建文章<br><code>hexo new &lt;title&gt;</code><br>将在source目录下生成<code>&lt;title&gt;.md</code><br>编辑时按md文件规则编辑</li><li>新建菜单栏<br>以<code>about</code>页面为例：<br><code>hexo new page about</code><br>将source/about/index.md文件内的type改为about，如下：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: about</span><br><span class="line">type: "about"</span><br><span class="line">---</span><br></pre></td></tr></table></figure></li></ul><h2 id="定义自己的博客"><a href="#定义自己的博客" class="headerlink" title="定义自己的博客"></a>定义自己的博客</h2><h3 id="添加看板娘"><a href="#添加看板娘" class="headerlink" title="添加看板娘"></a>添加看板娘</h3><ol><li><p>安装依赖包</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br><span class="line"><span class="comment"># 添加自己想选择的模型</span></span><br><span class="line">npm i live2d-widget-model-nipsilon</span><br></pre></td></tr></table></figure><p>模型列表：<a href="https://github.com/xiazeyu/live2d-widget-models" target="_blank" rel="noopener">https://github.com/xiazeyu/live2d-widget-models</a><br>在线演示地址：<a href="https://huaji8.top/post/live2d-plugin-2.0/" target="_blank" rel="noopener">https://huaji8.top/post/live2d-plugin-2.0/</a></p></li><li><p>_config.yml配置：</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">live2d:</span><br><span class="line">  enable: true</span><br><span class="line">  scriptFrom: local</span><br><span class="line">  model:</span><br><span class="line">    use: live2d-widget-model-nipsilon</span><br><span class="line">  display:</span><br><span class="line">    position: left</span><br><span class="line">    width: 150</span><br><span class="line">    height: 150</span><br><span class="line">  mobile:</span><br><span class="line">    show: false</span><br><span class="line">  react:</span><br><span class="line">    opacityDefault: .8</span><br><span class="line">  dev:</span><br><span class="line">    log: true</span><br><span class="line">    mouseLog: true</span><br></pre></td></tr></table></figure><p>按需配置：<br>参数说明：<br><a href="https://l2dwidget.js.org/docs/class/src/index.js~L2Dwidget.html" target="_blank" rel="noopener">https://l2dwidget.js.org/docs/class/src/index.js~L2Dwidget.html</a><br>了解更多的话可以看张鑫旭大神的文章哦：<a href="https://www.zhangxinxu.com/wordpress/2018/05/live2d-web-webgl-js/" target="_blank" rel="noopener">https://www.zhangxinxu.com/wordpress/2018/05/live2d-web-webgl-js/</a></p></li><li>自定义菜单<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dialog = <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;div class='dialog'&gt;</span></span><br><span class="line"><span class="string">    &lt;div class='words'&gt;你好(〃'▽'〃)&lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;div class='menu'&gt;</span></span><br><span class="line"><span class="string">      &lt;ul class='menu-list'&gt;</span></span><br><span class="line"><span class="string">        &lt;li&gt;&lt;i class='fa fa-home'&gt;&lt;/i&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">        &lt;li&gt;&lt;i class='fa fa-music'&gt;&lt;/i&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">        &lt;li&gt;&lt;i class='fa fa-comment'&gt;&lt;/i&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">        &lt;li&gt;&lt;i class='fa fa-camera'&gt;&lt;/i&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">        &lt;li&gt;&lt;i class='fa fa-info-circle'&gt;&lt;/i&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">        &lt;li&gt;&lt;i class='fa fa-times-circle'&gt;&lt;/i&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">      &lt;/ul&gt;</span></span><br><span class="line"><span class="string">      &lt;ul class='menu-music'&gt;</span></span><br><span class="line"><span class="string">        &lt;li&gt;&lt;i class='fa fa-play-circle'&gt;&lt;/i&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">        &lt;li&gt;&lt;i class='fa fa-pause-circle'&gt;&lt;/i&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">      &lt;/ul&gt;</span></span><br><span class="line"><span class="string">    &lt;div&gt;</span></span><br><span class="line"><span class="string">  &lt;div&gt;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  $(<span class="string">'#live2d-widget'</span>).append(dialog)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br><span class="line">$(<span class="string">'.menu-list'</span>).on(<span class="string">'mouseenter'</span>, <span class="string">'i'</span>, (e) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 添加hover事件</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">$(<span class="string">'.menu-list'</span>).on(<span class="string">'click'</span>, <span class="string">'i'</span>, (e) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 添加点击事件</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li></ol><h3 id="添加音乐播放器"><a href="#添加音乐播放器" class="headerlink" title="添加音乐播放器"></a>添加音乐播放器</h3><p>插件：<a href="https://aplayer.js.org/#/" target="_blank" rel="noopener">https://aplayer.js.org/#/</a><br>添加插件后目录链接无法点击问题：<br>将这一句代码去掉就可以了<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!e.defaultPrevented)&#123;e.preventDefault(),location.hash!==<span class="keyword">this</span>.hash&amp;&amp;<span class="built_in">window</span>.history.pushState(<span class="literal">null</span>,<span class="literal">null</span>,<span class="keyword">this</span>.hash);<span class="keyword">var</span> n=<span class="built_in">document</span>.getElementById(<span class="keyword">this</span>.hash.substring(<span class="number">1</span>));<span class="keyword">if</span>(!n)<span class="keyword">return</span>;t(n,<span class="number">500</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;location.replace(<span class="string">"#"</span>+e.id)&#125;)&#125;</span><br></pre></td></tr></table></figure></p><h3 id="自定义模板"><a href="#自定义模板" class="headerlink" title="自定义模板"></a>自定义模板</h3><p>以本博客所用的主题Maupassant为例， 其中<a href="/history/">历史</a>页面使用了一个时间轴<br>从_config.yml配置文件可以看到：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">timeline:</span><br><span class="line">  - num: 1</span><br><span class="line">    word: 2014/06/12-Start</span><br><span class="line">  - num: 2</span><br><span class="line">    word: 2014/11/29-XXX</span><br><span class="line">  - num: 3</span><br><span class="line">    word: 2015/02/18-DDD</span><br><span class="line">  - num: 4</span><br><span class="line">    word: More</span><br></pre></td></tr></table></figure></p><p>同时在主题的模板目录下有一个timeline.pug文件, 里面内容为：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">extends base</span><br><span class="line">block title</span><br><span class="line">  title= page.title + <span class="string">' | '</span> + config.title</span><br><span class="line">block content</span><br><span class="line">  <span class="comment">// ...some code</span></span><br><span class="line">    - <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> theme.timeline)</span><br><span class="line">        div.timeline-entry</span><br><span class="line">          div.timeline-entry-inner</span><br><span class="line">            div(<span class="class"><span class="keyword">class</span></span>=<span class="string">"timeline-icon wow fadeInUp"</span> data-wow-delay=<span class="string">"0.2s"</span>)</span><br><span class="line">              span.number= theme.timeline[i].num</span><br><span class="line">            div(<span class="class"><span class="keyword">class</span></span>=<span class="string">"timeline-label wow fadeInUp"</span> data-wow-delay=<span class="string">"0.2s"</span>)</span><br><span class="line">              span.word= theme.timeline[i].word</span><br><span class="line">  <span class="comment">// ...some code</span></span><br></pre></td></tr></table></figure></p><p>使用timeliness这个组件只需要在md文件的front-matter中添加<br><code>layout: timeline</code><br>这样就很清楚啦，在配置文件中定义变量，在模板中读取，写文章时修改layout就ok了( • ̀ω•́ )✧<br>所以自己来写一个吧！ (以本博客的<a href="/about/">关于</a>页面为例，页面下方的联系用了自己的模板)</p><ol><li><p>首先新建一个文件<code>about.pug</code><br>内容类似：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">extends base</span><br><span class="line">block title</span><br><span class="line">  title= page.title + <span class="string">' | '</span> + config.title</span><br><span class="line">block content</span><br><span class="line">  <span class="comment">// ..some code</span></span><br><span class="line">              - <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> theme.about)</span><br><span class="line">                a(href=theme.about[i].href, title=theme.about[i].name)</span><br><span class="line">                  i(<span class="class"><span class="keyword">class</span></span>=<span class="string">'fa '</span> + theme.about[i].icon)</span><br><span class="line">  <span class="comment">// ...some code</span></span><br></pre></td></tr></table></figure></li><li><p>配置文件添加变量<br>形式可以自己定义，只要模板文件遵循格式就好啦(～￣▽￣)～ </p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">about:</span><br><span class="line">  - name: github</span><br><span class="line">    href: https://github.com/amenging</span><br><span class="line">    icon: fa-github</span><br></pre></td></tr></table></figure></li><li><p>修改md文件的<code>layout</code>为<code>about</code></p></li></ol><h3 id="添加emoji"><a href="#添加emoji" class="headerlink" title="添加emoji"></a>添加emoji</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm un hexo-renderer-marked --save</span><br><span class="line">npm i hexo-renderer-markdown-it --save </span><br><span class="line">npm install markdown-it-emoji --save</span><br></pre></td></tr></table></figure><p>中间如果执行有错误先运行hexo clean哦<br><code>_config.yml</code>添加<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plugins:</span><br><span class="line">  - markdown-it-footnote</span><br><span class="line">  - markdown-it-sup</span><br><span class="line">  - markdown-it-sub</span><br><span class="line">  - markdown-it-abbr</span><br><span class="line">  - markdown-it-emoji</span><br></pre></td></tr></table></figure></p><p>emoji网站：<a href="https://www.emojicopy.com/" target="_blank" rel="noopener">https://www.emojicopy.com/</a></p><h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><h3 id="清除public目录"><a href="#清除public目录" class="headerlink" title="清除public目录"></a>清除public目录</h3><p><code>hexo clean</code></p><h3 id="rss订阅"><a href="#rss订阅" class="headerlink" title="rss订阅"></a>rss订阅</h3><p><code>npm install hexo-generator-feed --save</code><br>在_config.yml下添加<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#RSS订阅</span></span><br><span class="line">plugin:</span><br><span class="line">- hexo-generator-feed</span><br><span class="line"><span class="comment">#Feed Atom</span></span><br><span class="line">feed:</span><br><span class="line">type: atom</span><br><span class="line">path: atom.xml</span><br><span class="line">limit: 20</span><br></pre></td></tr></table></figure></p><p>当然_config.yml的menu里也要添加<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- page: rss</span><br><span class="line">  directory: atom.xml</span><br><span class="line">  icon: fa-rss</span><br></pre></td></tr></table></figure></p><h3 id="创建404页面"><a href="#创建404页面" class="headerlink" title="创建404页面"></a>创建404页面</h3><p><code>hexo new page 404</code><br>这样就可以啦，github会把它作为默认404<br>不过听说要绑定域名哦</p><h3 id="添加gittalk"><a href="#添加gittalk" class="headerlink" title="添加gittalk"></a>添加gittalk</h3><p>github的设置在”settings/developers”</p>]]></content>
+    
+    <summary type="html">
+    
+      我的博客诞生啦~出生纪念٩(๑❛ᴗ❛๑)۶各种折腾，github赛高
+    
+    </summary>
+    
+      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="hexo" scheme="https://amenging.netlify.com/tags/hexo/"/>
+    
+      <category term="git" scheme="https://amenging.netlify.com/tags/git/"/>
+    
+  </entry>
+  
+</feed>
