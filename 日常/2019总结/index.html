@@ -1,20 +1,22 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="Ameng | 阿萌 | amenging | Hexo | Typecho | 随笔"><title>js相关 | Ameng</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">js相关</h1><a id="logo" href="/.">Ameng</a><p class="description">岛与睡莲</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a><a href="/anime/"><i class="fa fa-cubes"> 追番</i></a><a href="/collection/"><i class="fa fa-star"> 收藏夹</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">js相关</h1><div class="post-meta">Jul 31, 2018<span> | </span><span class="category"><a href="/categories/技术/">技术</a></span></div><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#中缀表达式转逆波兰式"><span class="toc-number">1.</span> <span class="toc-text">中缀表达式转逆波兰式</span></a></li></ol></div></div><div class="post-content"><h2 id="中缀表达式转逆波兰式"><a href="#中缀表达式转逆波兰式" class="headerlink" title="中缀表达式转逆波兰式"></a>中缀表达式转逆波兰式</h2><p>实现过程：</p>
-<p>1.首先创建两个空数组，result用来存放结果，temp用来存放符号；再创建一个符号集ops存放+-*/符号</p>
-<p>2.转表达式字符为数组，开始遍历数组</p>
-<p>3.如果遇到运算符，直接推入结果数组</p>
-<p>4.遇到括号</p>
-<p>　　1）遇到’(‘，推入暂存区</p>
-<p>　　2）遇到’)’，依次弹出暂存区栈顶运算符直到’(‘，并且删除暂存区的’(‘</p>
-<p>5.遇到运算符</p>
-<p>　　1）如果暂存区</p>
-<p>　　　　①为空</p>
-<p>　　　　②暂存区栈顶为’(‘</p>
-<p>　　　　③当前符号的优先级高于暂存区栈顶运算符</p>
-<p>　　　　这几种情况直接推入栈内</p>
-<p>　　2）否则，将暂存区栈顶运算符弹出并推入结果区，再次进行步骤5</p>
-<p>6.遍历完成则将暂存区剩余运算符依次弹出并推入结果区</p>
-<p>代码链接<br><a href="https://codepen.io/amenging/pen/djdvqR?editors=1111" target="_blank" rel="noopener">https://codepen.io/amenging/pen/djdvqR?editors=1111</a></p>
-</div><div class="tags"><a href="/tags/前端/">前端</a><a href="/tags/笔记/">笔记</a><a href="/tags/javascript/">javascript</a></div><div class="post-nav"><a class="pre" href="/技术/xx-net/">xx-net使用记录</a><a class="next" href="/技术/css-skill/">css笔记</a></div><div id="container"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/gitalk/dist/gitalk.css?v=0.0.0"><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=0.0.0"></script><script type="text/javascript" src="//unpkg.com/gitalk/dist/gitalk.min.js?v=0.0.0"></script><script>var gitalk = new Gitalk({
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="Ameng | 阿萌 | amenging | Hexo | Typecho | 随笔"><title>2019总结 | Ameng</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">2019总结</h1><a id="logo" href="/.">Ameng</a><p class="description">岛与睡莲</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a><a href="/anime/"><i class="fa fa-cubes"> 追番</i></a><a href="/collection/"><i class="fa fa-star"> 收藏夹</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">2019总结</h1><div class="post-meta">Jan 7, 2020<span> | </span><span class="category"><a href="/categories/日常/">日常</a></span></div><div class="post-content"><p>今天翻feedly看到很多人写了年终总结，也想凑凑热闹，胡乱写一下流水账。顺便回忆一下hexo怎么用…</p>
+<p>2019年真是坎坷的一年。</p>
+<p>4月初离职，恍恍惚惚地过了一个月，4月底到上海，过完五一之后，在上海开始了新的生活，有了可以一起看动漫敲代码的室友，中间折腾了挺多东西，却又一事无成。7月底才因为银行卡余额窘迫，开始找工作，第一天面试，第二天上班，一上来就加班了个通宵，在怀疑人生的思考中也坚持过来了，后面的几个月还算轻松，直到年底又开始忙。</p>
+<p>最糟糕的事情就是被迫停止工作那天了，大概是2019最糟糕的一天，简直如同电视剧情节，甚至有点魔幻。但是它也总算结束了我在南京的时光，算是福祸相依吧。</p>
+<p>现在的公司，待着还算舒服，暂时不会离开。</p>
+<p>最大的收获是遇见了k大的课程。</p>
+<p>最大的进步大概是学了three.js。</p>
+<p>十月至今，除了偶尔断掉，每天都在背日语单词。</p>
+<p>12月底搬家，换了个比较大的屋子，终于见到了阳光，还买了一张大桌子，一下子起了劲，把拖了半年的字幕做完了。</p>
+<p>2020，听起来很科幻的名字。有很多想做的事情，flag高高立起：</p>
+<ul>
+<li>完成k大的透视课程</li>
+<li>学完日语初级</li>
+<li>做2到3个字幕</li>
+<li>继续写博客</li>
+<li>捡起LeetCode题目</li>
+<li>可以的话，不管哪里去旅游一次</li>
+</ul>
+</div><div class="tags"></div><div class="post-nav"><a class="next" href="/技术/mongodb-user-manage/">mongodb使用用户名密码登录</a></div><div id="container"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/gitalk/dist/gitalk.css?v=0.0.0"><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=0.0.0"></script><script type="text/javascript" src="//unpkg.com/gitalk/dist/gitalk.min.js?v=0.0.0"></script><script>var gitalk = new Gitalk({
   clientID: '679d6c946e2e540fa387',
   clientSecret: '40ab16fdb1d63a699fb326d16f04ab3605d6c786',
   repo: 'amenging.github.io',

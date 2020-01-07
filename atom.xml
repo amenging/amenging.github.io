@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://amenging.netlify.com/"/>
-  <updated>2019-05-22T12:51:38.001Z</updated>
+  <updated>2020-01-07T16:05:20.436Z</updated>
   <id>https://amenging.netlify.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2019总结</title>
+    <link href="https://amenging.netlify.com/%E6%97%A5%E5%B8%B8/2019%E6%80%BB%E7%BB%93/"/>
+    <id>https://amenging.netlify.com/日常/2019总结/</id>
+    <published>2020-01-07T15:48:30.000Z</published>
+    <updated>2020-01-07T16:05:20.436Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天翻feedly看到很多人写了年终总结，也想凑凑热闹，胡乱写一下流水账。顺便回忆一下hexo怎么用…</p><p>2019年真是坎坷的一年。</p><p>4月初离职，恍恍惚惚地过了一个月，4月底到上海，过完五一之后，在上海开始了新的生活，有了可以一起看动漫敲代码的室友，中间折腾了挺多东西，却又一事无成。7月底才因为银行卡余额窘迫，开始找工作，第一天面试，第二天上班，一上来就加班了个通宵，在怀疑人生的思考中也坚持过来了，后面的几个月还算轻松，直到年底又开始忙。</p><p>最糟糕的事情就是被迫停止工作那天了，大概是2019最糟糕的一天，简直如同电视剧情节，甚至有点魔幻。但是它也总算结束了我在南京的时光，算是福祸相依吧。</p><p>现在的公司，待着还算舒服，暂时不会离开。</p><p>最大的收获是遇见了k大的课程。</p><p>最大的进步大概是学了three.js。</p><p>十月至今，除了偶尔断掉，每天都在背日语单词。</p><p>12月底搬家，换了个比较大的屋子，终于见到了阳光，还买了一张大桌子，一下子起了劲，把拖了半年的字幕做完了。</p><p>2020，听起来很科幻的名字。有很多想做的事情，flag高高立起：</p><ul><li>完成k大的透视课程</li><li>学完日语初级</li><li>做2到3个字幕</li><li>继续写博客</li><li>捡起LeetCode题目</li><li>可以的话，不管哪里去旅游一次</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;今天翻feedly看到很多人写了年终总结，也想凑凑热闹，胡乱写一下流水账。顺便回忆一下hexo怎么用…&lt;/p&gt;
+&lt;p&gt;2019年真是坎坷的一年。&lt;/p&gt;
+&lt;p&gt;4月初离职，恍恍惚惚地过了一个月，4月底到上海，过完五一之后，在上海开始了新的生活，有了可以一起看动漫敲代码的室友
+      
+    
+    </summary>
+    
+      <category term="日常" scheme="https://amenging.netlify.com/categories/%E6%97%A5%E5%B8%B8/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>mongodb使用用户名密码登录</title>
@@ -132,9 +157,9 @@
       <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="ftp" scheme="https://amenging.netlify.com/tags/ftp/"/>
-    
       <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="ftp" scheme="https://amenging.netlify.com/tags/ftp/"/>
     
   </entry>
   
@@ -200,11 +225,11 @@
       <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
+      <category term="前端" scheme="https://amenging.netlify.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
       <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
       <category term="javascript" scheme="https://amenging.netlify.com/tags/javascript/"/>
-    
-      <category term="前端" scheme="https://amenging.netlify.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -226,11 +251,11 @@
       <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
+      <category term="css" scheme="https://amenging.netlify.com/tags/css/"/>
     
       <category term="前端" scheme="https://amenging.netlify.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="css" scheme="https://amenging.netlify.com/tags/css/"/>
+      <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -252,31 +277,9 @@
       <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="mongodb" scheme="https://amenging.netlify.com/tags/mongodb/"/>
-    
       <category term="ubuntu" scheme="https://amenging.netlify.com/tags/ubuntu/"/>
     
-  </entry>
-  
-  <entry>
-    <title>git多用户管理</title>
-    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/gitusers/"/>
-    <id>https://amenging.netlify.com/技术/gitusers/</id>
-    <published>2018-07-30T08:01:25.000Z</published>
-    <updated>2019-05-22T12:51:38.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://www.cnblogs.com/amenging/p/7944504.html" target="_blank" rel="noopener">[老物搬运有修改]</a></p><p>环境: <code>win7 + gitbash</code></p><blockquote><p>有时候在工作和学习时我们有不同的github账户，可能不同项目还有不同的ssh key，或者既有github账户又有码云账户以及自己的gitblit账户，比如我有两个github两个码云以及一个gitblit，一个ssh key怎么够啊摔，所以不同账户的key要好好管理，从本地跑去提交的时候才不会迷路ヽ(￣▽￣)ﾉ</p></blockquote><h2 id="生成ssh-key"><a href="#生成ssh-key" class="headerlink" title="生成ssh-key"></a>生成ssh-key</h2><p>在git-bash输入<code>ssh-keygen -t rsa -C &#39;用户邮箱&#39;</code><br>为了便于管理，<code>Enter file in which to save the key</code>最好输入存放key的文件名称，如<code>/c/Users/你的用户名/.ssh/ssh-test</code>，然后enter到最后就可以了~<br><img src="http://wx4.sinaimg.cn/mw690/005QPjztgy1fu5hyvtnsmj30fo08lt8p.jpg" alt=""><br>注：如果没有输入目录则生成的文件在命令行运行的目录下，默认名称<code>id_rsa</code>，建议将key统一放在<code>C:\Users\你的用户名\.ssh</code>目录下<br>生成之后在目录下可以看到：<br><img src="http://wx3.sinaimg.cn/mw690/005QPjztgy1fu5hw15hzdj30gy01ajr6.jpg" alt=""></p><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>编辑<code>.ssh</code>目录下的<code>config</code>文件（没有则创建），格式如下；<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host 别名（如github1）</span><br><span class="line">User 用户名</span><br><span class="line">Hostname github.com（这里才是真正的主机名）</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile 存放公钥的文件（如~<span class="regexp">/.ssh/i</span>d_rsa）</span><br><span class="line">IdentitiesOnly yes</span><br></pre></td></tr></table></figure></p><p>重点来了，本地项目下的<code>.git/config</code>文件中的<strong>remote地址</strong>一定要<strong>跟config文件中的别名</strong>对应！</p><p>以github的ssh地址为例：<br>Host为<code>github001</code>，那么remote地址就为<code>git@github001:你的用户名/你的项目地址</code></p><p>下图左边是我的ssh config配置，右边是两个项目的.git/config配置，可以看到url和host别名是一一对应的(第一个是github，第二个是gitblit)<br><img src="http://wx4.sinaimg.cn/mw690/005QPjztgy1fts32rt2swj30rw0apdgv.jpg" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      有时候在工作和学习时我们有不同的github账户，可能不同项目还有不同的ssh key，或者既有github账户又有码云账户以及自己的gitblit账户，比如我有两个github两个码云以及一个gitblit，一个ssh key怎么够啊摔，所以不同账户的key要好好管理，提交的时候才不会迷路ヽ(￣▽￣)ﾉ
-    
-    </summary>
-    
-      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="git" scheme="https://amenging.netlify.com/tags/git/"/>
+      <category term="mongodb" scheme="https://amenging.netlify.com/tags/mongodb/"/>
     
   </entry>
   
@@ -303,6 +306,28 @@
   </entry>
   
   <entry>
+    <title>git多用户管理</title>
+    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/gitusers/"/>
+    <id>https://amenging.netlify.com/技术/gitusers/</id>
+    <published>2018-07-30T08:01:25.000Z</published>
+    <updated>2019-05-22T12:51:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.cnblogs.com/amenging/p/7944504.html" target="_blank" rel="noopener">[老物搬运有修改]</a></p><p>环境: <code>win7 + gitbash</code></p><blockquote><p>有时候在工作和学习时我们有不同的github账户，可能不同项目还有不同的ssh key，或者既有github账户又有码云账户以及自己的gitblit账户，比如我有两个github两个码云以及一个gitblit，一个ssh key怎么够啊摔，所以不同账户的key要好好管理，从本地跑去提交的时候才不会迷路ヽ(￣▽￣)ﾉ</p></blockquote><h2 id="生成ssh-key"><a href="#生成ssh-key" class="headerlink" title="生成ssh-key"></a>生成ssh-key</h2><p>在git-bash输入<code>ssh-keygen -t rsa -C &#39;用户邮箱&#39;</code><br>为了便于管理，<code>Enter file in which to save the key</code>最好输入存放key的文件名称，如<code>/c/Users/你的用户名/.ssh/ssh-test</code>，然后enter到最后就可以了~<br><img src="http://wx4.sinaimg.cn/mw690/005QPjztgy1fu5hyvtnsmj30fo08lt8p.jpg" alt=""><br>注：如果没有输入目录则生成的文件在命令行运行的目录下，默认名称<code>id_rsa</code>，建议将key统一放在<code>C:\Users\你的用户名\.ssh</code>目录下<br>生成之后在目录下可以看到：<br><img src="http://wx3.sinaimg.cn/mw690/005QPjztgy1fu5hw15hzdj30gy01ajr6.jpg" alt=""></p><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>编辑<code>.ssh</code>目录下的<code>config</code>文件（没有则创建），格式如下；<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host 别名（如github1）</span><br><span class="line">User 用户名</span><br><span class="line">Hostname github.com（这里才是真正的主机名）</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile 存放公钥的文件（如~<span class="regexp">/.ssh/i</span>d_rsa）</span><br><span class="line">IdentitiesOnly yes</span><br></pre></td></tr></table></figure></p><p>重点来了，本地项目下的<code>.git/config</code>文件中的<strong>remote地址</strong>一定要<strong>跟config文件中的别名</strong>对应！</p><p>以github的ssh地址为例：<br>Host为<code>github001</code>，那么remote地址就为<code>git@github001:你的用户名/你的项目地址</code></p><p>下图左边是我的ssh config配置，右边是两个项目的.git/config配置，可以看到url和host别名是一一对应的(第一个是github，第二个是gitblit)<br><img src="http://wx4.sinaimg.cn/mw690/005QPjztgy1fts32rt2swj30rw0apdgv.jpg" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      有时候在工作和学习时我们有不同的github账户，可能不同项目还有不同的ssh key，或者既有github账户又有码云账户以及自己的gitblit账户，比如我有两个github两个码云以及一个gitblit，一个ssh key怎么够啊摔，所以不同账户的key要好好管理，提交的时候才不会迷路ヽ(￣▽￣)ﾉ
+    
+    </summary>
+    
+      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="git" scheme="https://amenging.netlify.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
     <title>hexo搭建博客过程记录</title>
     <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/hexo/"/>
     <id>https://amenging.netlify.com/技术/hexo/</id>
@@ -320,9 +345,9 @@
       <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="hexo" scheme="https://amenging.netlify.com/tags/hexo/"/>
-    
       <category term="git" scheme="https://amenging.netlify.com/tags/git/"/>
+    
+      <category term="hexo" scheme="https://amenging.netlify.com/tags/hexo/"/>
     
   </entry>
   
