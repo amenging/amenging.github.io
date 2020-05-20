@@ -1,5 +1,6 @@
+$(window).scrollTop() > 500 ? $("#rocket").addClass("show") : $("#rocket").removeClass("show");
 $(window).scroll(function() {
-    $(window).scrollTop() > 500 ? $("#rocket").addClass("show") : $("#rocket").removeClass("show");
+    $(window).scrollTop() > 300 ? $("#rocket").addClass("show") : $("#rocket").removeClass("show");
 });
 $("#rocket").click(function() {
     $("#rocket").addClass("launch");
