@@ -210,9 +210,9 @@
       <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="ftp" scheme="https://amenging.netlify.com/tags/ftp/"/>
+    
+      <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -288,9 +288,9 @@
       <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="前端" scheme="https://amenging.netlify.com/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="前端" scheme="https://amenging.netlify.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="javascript" scheme="https://amenging.netlify.com/tags/javascript/"/>
     
@@ -314,11 +314,11 @@
       <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
+      <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
       <category term="css" scheme="https://amenging.netlify.com/tags/css/"/>
     
       <category term="前端" scheme="https://amenging.netlify.com/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-      <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -347,28 +347,6 @@
   </entry>
   
   <entry>
-    <title>git多用户管理</title>
-    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/gitusers/"/>
-    <id>https://amenging.netlify.com/技术/gitusers/</id>
-    <published>2018-07-30T08:01:25.000Z</published>
-    <updated>2020-01-08T01:53:07.489Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://www.cnblogs.com/amenging/p/7944504.html" target="_blank" rel="noopener">[老物搬运有修改]</a></p><p>环境: <code>win7 + gitbash</code></p><blockquote><p>有时候在工作和学习时我们有不同的github账户，可能不同项目还有不同的ssh key，或者既有github账户又有码云账户以及自己的gitblit账户，比如我有两个github两个码云以及一个gitblit，一个ssh key怎么够啊摔，所以不同账户的key要好好管理，从本地跑去提交的时候才不会迷路ヽ(￣▽￣)ﾉ</p></blockquote><h2 id="生成ssh-key"><a href="#生成ssh-key" class="headerlink" title="生成ssh-key"></a>生成ssh-key</h2><p>在git-bash输入<code>ssh-keygen -t rsa -C &#39;用户邮箱&#39;</code><br>为了便于管理，<code>Enter file in which to save the key</code>最好输入存放key的文件名称，如<code>/c/Users/你的用户名/.ssh/ssh-test</code>，然后enter到最后就可以了~<br><img src="http://wx4.sinaimg.cn/mw690/005QPjztgy1fu5hyvtnsmj30fo08lt8p.jpg" alt=""><br>注：如果没有输入目录则生成的文件在命令行运行的目录下，默认名称<code>id_rsa</code>，建议将key统一放在<code>C:\Users\你的用户名\.ssh</code>目录下<br>生成之后在目录下可以看到：<br><img src="http://wx3.sinaimg.cn/mw690/005QPjztgy1fu5hw15hzdj30gy01ajr6.jpg" alt=""></p><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>编辑<code>.ssh</code>目录下的<code>config</code>文件（没有则创建），格式如下；<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host 别名（如github1）</span><br><span class="line">User 用户名</span><br><span class="line">Hostname github.com（这里才是真正的主机名）</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile 存放公钥的文件（如~<span class="regexp">/.ssh/i</span>d_rsa）</span><br><span class="line">IdentitiesOnly yes</span><br></pre></td></tr></table></figure></p><p>重点来了，本地项目下的<code>.git/config</code>文件中的<strong>remote地址</strong>一定要<strong>跟config文件中的别名</strong>对应！</p><p>以github的ssh地址为例：<br>Host为<code>github001</code>，那么remote地址就为<code>git@github001:你的用户名/你的项目地址</code></p><p>下图左边是我的ssh config配置，右边是两个项目的.git/config配置，可以看到url和host别名是一一对应的(第一个是github，第二个是gitblit)<br><img src="http://wx4.sinaimg.cn/mw690/005QPjztgy1fts32rt2swj30rw0apdgv.jpg" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      有时候在工作和学习时我们有不同的github账户，可能不同项目还有不同的ssh key，或者既有github账户又有码云账户以及自己的gitblit账户，比如我有两个github两个码云以及一个gitblit，一个ssh key怎么够啊摔，所以不同账户的key要好好管理，提交的时候才不会迷路ヽ(￣▽￣)ﾉ
-    
-    </summary>
-    
-      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="git" scheme="https://amenging.netlify.com/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
     <title>windows环境下搭建gitblit</title>
     <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/gitblit/"/>
     <id>https://amenging.netlify.com/技术/gitblit/</id>
@@ -387,6 +365,28 @@
     
     
       <category term="gitblit" scheme="https://amenging.netlify.com/tags/gitblit/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git多用户管理</title>
+    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/gitusers/"/>
+    <id>https://amenging.netlify.com/技术/gitusers/</id>
+    <published>2018-07-30T08:01:25.000Z</published>
+    <updated>2020-01-08T01:53:07.489Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.cnblogs.com/amenging/p/7944504.html" target="_blank" rel="noopener">[老物搬运有修改]</a></p><p>环境: <code>win7 + gitbash</code></p><blockquote><p>有时候在工作和学习时我们有不同的github账户，可能不同项目还有不同的ssh key，或者既有github账户又有码云账户以及自己的gitblit账户，比如我有两个github两个码云以及一个gitblit，一个ssh key怎么够啊摔，所以不同账户的key要好好管理，从本地跑去提交的时候才不会迷路ヽ(￣▽￣)ﾉ</p></blockquote><h2 id="生成ssh-key"><a href="#生成ssh-key" class="headerlink" title="生成ssh-key"></a>生成ssh-key</h2><p>在git-bash输入<code>ssh-keygen -t rsa -C &#39;用户邮箱&#39;</code><br>为了便于管理，<code>Enter file in which to save the key</code>最好输入存放key的文件名称，如<code>/c/Users/你的用户名/.ssh/ssh-test</code>，然后enter到最后就可以了~<br><img src="http://wx4.sinaimg.cn/mw690/005QPjztgy1fu5hyvtnsmj30fo08lt8p.jpg" alt=""><br>注：如果没有输入目录则生成的文件在命令行运行的目录下，默认名称<code>id_rsa</code>，建议将key统一放在<code>C:\Users\你的用户名\.ssh</code>目录下<br>生成之后在目录下可以看到：<br><img src="http://wx3.sinaimg.cn/mw690/005QPjztgy1fu5hw15hzdj30gy01ajr6.jpg" alt=""></p><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>编辑<code>.ssh</code>目录下的<code>config</code>文件（没有则创建），格式如下；<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host 别名（如github1）</span><br><span class="line">User 用户名</span><br><span class="line">Hostname github.com（这里才是真正的主机名）</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile 存放公钥的文件（如~<span class="regexp">/.ssh/i</span>d_rsa）</span><br><span class="line">IdentitiesOnly yes</span><br></pre></td></tr></table></figure></p><p>重点来了，本地项目下的<code>.git/config</code>文件中的<strong>remote地址</strong>一定要<strong>跟config文件中的别名</strong>对应！</p><p>以github的ssh地址为例：<br>Host为<code>github001</code>，那么remote地址就为<code>git@github001:你的用户名/你的项目地址</code></p><p>下图左边是我的ssh config配置，右边是两个项目的.git/config配置，可以看到url和host别名是一一对应的(第一个是github，第二个是gitblit)<br><img src="http://wx4.sinaimg.cn/mw690/005QPjztgy1fts32rt2swj30rw0apdgv.jpg" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      有时候在工作和学习时我们有不同的github账户，可能不同项目还有不同的ssh key，或者既有github账户又有码云账户以及自己的gitblit账户，比如我有两个github两个码云以及一个gitblit，一个ssh key怎么够啊摔，所以不同账户的key要好好管理，提交的时候才不会迷路ヽ(￣▽￣)ﾉ
+    
+    </summary>
+    
+      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="git" scheme="https://amenging.netlify.com/tags/git/"/>
     
   </entry>
   
