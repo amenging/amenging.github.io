@@ -210,9 +210,9 @@
       <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="ftp" scheme="https://amenging.netlify.com/tags/ftp/"/>
-    
       <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="ftp" scheme="https://amenging.netlify.com/tags/ftp/"/>
     
   </entry>
   
@@ -288,9 +288,9 @@
       <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="前端" scheme="https://amenging.netlify.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
       <category term="javascript" scheme="https://amenging.netlify.com/tags/javascript/"/>
     
@@ -314,11 +314,11 @@
       <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="css" scheme="https://amenging.netlify.com/tags/css/"/>
     
       <category term="前端" scheme="https://amenging.netlify.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -347,28 +347,6 @@
   </entry>
   
   <entry>
-    <title>windows环境下搭建gitblit</title>
-    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/gitblit/"/>
-    <id>https://amenging.netlify.com/技术/gitblit/</id>
-    <published>2018-07-30T08:01:25.000Z</published>
-    <updated>2020-01-08T01:53:07.488Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://www.cnblogs.com/amenging/p/7944504.html" target="_blank" rel="noopener">[老物搬运有修改]</a></p><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="下载java1-8-1"><a href="#下载java1-8-1" class="headerlink" title="下载java1.8.1"></a>下载java1.8.1</h3><p><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p><p>先装了java9，启动gitblit.cmd报错，又换成了1.8.1的jdk， 报错如下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java.lang.ClassCastException: java.base/jdk.internal.loader.ClassLoaders<span class="variable">$AppClassLoader</span> cannot be cast to java.base/java.net.URLClassLoader</span><br><span class="line">at org.moxie.MxLauncher.addJarFile(MxLauncher.java:170)</span><br><span class="line">at org.moxie.MxLauncher.main(MxLauncher.java:117)</span><br></pre></td></tr></table></figure><h3 id="下载gitblit（1-8-0）"><a href="#下载gitblit（1-8-0）" class="headerlink" title="下载gitblit（1.8.0）"></a>下载gitblit（1.8.0）</h3><p><a href="http://gitblit.com/" target="_blank" rel="noopener">http://gitblit.com/</a></p><h3 id="配置java环境变量"><a href="#配置java环境变量" class="headerlink" title="配置java环境变量"></a>配置java环境变量</h3><p>这个网上很多就不写啦， 配置好后命令行运行<code>java</code>和<code>javac</code>都可以就没问题啦</p><h2 id="配置运行"><a href="#配置运行" class="headerlink" title="配置运行"></a>配置运行</h2><h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>配置文件在gitblit安装目录下：<code>data/defaults.propoerties</code>，参考<a href="http://blog.csdn.net/hbtflying/article/details/52318691?locationNum=14" target="_blank" rel="noopener">这篇博客</a></p><p>主要修改的是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git.repositoriesFolder = git仓库目录(如d:<span class="regexp">/githubFolder)</span></span><br><span class="line"><span class="regexp">server.httpPort = http协议端口号</span></span><br><span class="line"><span class="regexp">server.httpBindInterface = 服务器ip地址</span></span><br></pre></td></tr></table></figure></p><h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>启动gitblit目录下的gitblit.cmd即可运行，运行installService.cmd可将gitblit作为Windows服务启动；</p><p>如果运行错误，建议运行目录下gitblit-stop.cmd停止后再重启；</p><p>启动后在浏览器输入服务器ip和http端口可访问，默认用户名admin，密码admin：</p><p><img src="http://wx3.sinaimg.cn/mw690/005QPjztgy1fts2yz3o5tj30vv036q2v.jpg" alt=""></p><h3 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h3><p><img src="http://wx1.sinaimg.cn/mw690/005QPjztgy1fts2xnavvxj305808oglf.jpg" alt="创建版本库"></p><p>创建好之后可以看到可以用ssh也可以用http：</p><p><img src="http://wx2.sinaimg.cn/mw690/005QPjztgy1fts2xnlrozj30gl08ujrs.jpg" alt=""></p><h3 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h3><p>通过用户中心添加ssh key：<br><img src="http://wx1.sinaimg.cn/mw690/005QPjztgy1fts31jt4i2j30ht0f50t1.jpg" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      从零开始的gitblit服务器
-    
-    </summary>
-    
-      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="gitblit" scheme="https://amenging.netlify.com/tags/gitblit/"/>
-    
-  </entry>
-  
-  <entry>
     <title>git多用户管理</title>
     <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/gitusers/"/>
     <id>https://amenging.netlify.com/技术/gitusers/</id>
@@ -387,6 +365,28 @@
     
     
       <category term="git" scheme="https://amenging.netlify.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>windows环境下搭建gitblit</title>
+    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/gitblit/"/>
+    <id>https://amenging.netlify.com/技术/gitblit/</id>
+    <published>2018-07-30T08:01:25.000Z</published>
+    <updated>2020-01-08T01:53:07.488Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.cnblogs.com/amenging/p/7944504.html" target="_blank" rel="noopener">[老物搬运有修改]</a></p><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="下载java1-8-1"><a href="#下载java1-8-1" class="headerlink" title="下载java1.8.1"></a>下载java1.8.1</h3><p><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p><p>先装了java9，启动gitblit.cmd报错，又换成了1.8.1的jdk， 报错如下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java.lang.ClassCastException: java.base/jdk.internal.loader.ClassLoaders<span class="variable">$AppClassLoader</span> cannot be cast to java.base/java.net.URLClassLoader</span><br><span class="line">at org.moxie.MxLauncher.addJarFile(MxLauncher.java:170)</span><br><span class="line">at org.moxie.MxLauncher.main(MxLauncher.java:117)</span><br></pre></td></tr></table></figure><h3 id="下载gitblit（1-8-0）"><a href="#下载gitblit（1-8-0）" class="headerlink" title="下载gitblit（1.8.0）"></a>下载gitblit（1.8.0）</h3><p><a href="http://gitblit.com/" target="_blank" rel="noopener">http://gitblit.com/</a></p><h3 id="配置java环境变量"><a href="#配置java环境变量" class="headerlink" title="配置java环境变量"></a>配置java环境变量</h3><p>这个网上很多就不写啦， 配置好后命令行运行<code>java</code>和<code>javac</code>都可以就没问题啦</p><h2 id="配置运行"><a href="#配置运行" class="headerlink" title="配置运行"></a>配置运行</h2><h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>配置文件在gitblit安装目录下：<code>data/defaults.propoerties</code>，参考<a href="http://blog.csdn.net/hbtflying/article/details/52318691?locationNum=14" target="_blank" rel="noopener">这篇博客</a></p><p>主要修改的是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git.repositoriesFolder = git仓库目录(如d:<span class="regexp">/githubFolder)</span></span><br><span class="line"><span class="regexp">server.httpPort = http协议端口号</span></span><br><span class="line"><span class="regexp">server.httpBindInterface = 服务器ip地址</span></span><br></pre></td></tr></table></figure></p><h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>启动gitblit目录下的gitblit.cmd即可运行，运行installService.cmd可将gitblit作为Windows服务启动；</p><p>如果运行错误，建议运行目录下gitblit-stop.cmd停止后再重启；</p><p>启动后在浏览器输入服务器ip和http端口可访问，默认用户名admin，密码admin：</p><p><img src="http://wx3.sinaimg.cn/mw690/005QPjztgy1fts2yz3o5tj30vv036q2v.jpg" alt=""></p><h3 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h3><p><img src="http://wx1.sinaimg.cn/mw690/005QPjztgy1fts2xnavvxj305808oglf.jpg" alt="创建版本库"></p><p>创建好之后可以看到可以用ssh也可以用http：</p><p><img src="http://wx2.sinaimg.cn/mw690/005QPjztgy1fts2xnlrozj30gl08ujrs.jpg" alt=""></p><h3 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h3><p>通过用户中心添加ssh key：<br><img src="http://wx1.sinaimg.cn/mw690/005QPjztgy1fts31jt4i2j30ht0f50t1.jpg" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      从零开始的gitblit服务器
+    
+    </summary>
+    
+      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="gitblit" scheme="https://amenging.netlify.com/tags/gitblit/"/>
     
   </entry>
   
