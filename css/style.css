@@ -234,13 +234,15 @@ div {
     text-justify: distribute;
     word-break: normal; }
     .post .post-content h2 {
-      margin: 1.4em 0 1.1em;
-      border-bottom: 1px solid #eee;
-      overflow: hidden; }
+      margin: 1.4em 0 0;
+      overflow: hidden;
+      font-size: 25px; }
     .post .post-content h3 {
-      margin: 1.4em 0 1.1em; }
+      margin: 1.4em 0 0; }
     .post .post-content pre code {
       padding: 0 2em; }
+    .post .post-content del {
+      opacity: .6; }
     .post .post-content p {
       margin: 0 0 1.234em; }
       .post .post-content p code {
@@ -2171,12 +2173,6 @@ p {
       border-radius: 3px; }
       .post .post-content img:hover {
         cursor: zoom-in; }
-    .post .post-content h2::before {
-      content: '「';
-      color: #fd8b8b; }
-    .post .post-content h2::after {
-      content: '」';
-      color: #fd8b8b; }
   .post .post-title {
     /*text-align: center;*/
     color: #e07e7e;
