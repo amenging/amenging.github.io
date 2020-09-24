@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://amenging.netlify.com/"/>
-  <updated>2020-08-07T08:30:32.906Z</updated>
+  <updated>2020-09-24T02:13:43.515Z</updated>
   <id>https://amenging.netlify.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>小程序和h5中遇到的问题总结</title>
+    <link href="https://amenging.netlify.com/%E6%8A%80%E6%9C%AF/ios-andriod/"/>
+    <id>https://amenging.netlify.com/技术/ios-andriod/</id>
+    <published>2020-09-23T10:44:21.000Z</published>
+    <updated>2020-09-24T02:13:43.515Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="小程序"><a href="#小程序" class="headerlink" title="小程序"></a>小程序</h2><ul><li>showToast和showLoading是冲突的，会显示后设置的那一个</li><li>showLoading的时候加上<code>mask: true</code>更好</li><li>做测试的时候注意小程序多个版本，比如从模板消息进入小程序，点击三个点图标可以查看小程序版本</li><li>access_token每天有调用次数限制，需要做缓存</li><li>小程序的storage接口并不是完全稳定的，使用重要数据时要仔细验证</li><li>图片竖排，中间出现空隙：设置<code>font-size: 0;</code>或者设置image的<code>display</code>为<code>flex</code></li><li>在进行用户授权/登录前要先让用户体验小程序或者说明小程序的功能，否则审核可能不通过</li><li>小程序默认加上更新代码，以免更新小程序时有缓存</li></ul><h2 id="h5"><a href="#h5" class="headerlink" title="h5"></a>h5</h2><ul><li>ios的input默认有<code>border-radius</code>和<code>-webkit-appearance</code>样式，用<code>border-radius: none</code>和<code>-webkit-appearance: none</code>清除</li><li>ios中input的disabled模式，整体颜色会变浅，如果需要保持原样式使用<code>readOnly</code>属性更好</li><li>ios中图片默认可以选中，文字可以复制，并且点击一个链接或者通过Javascript定义的可点击元素时，会出现一个半透明的灰色背景<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span>, <span class="selector-tag">img</span> &#123;</span><br><span class="line">  <span class="attribute">user-select</span>: none;</span><br><span class="line">  -webkit-tap-highlight-color: rgba(255, 0, 0, 0); // 改变半透明背景颜色</span><br><span class="line">  point-events: none; // 完全禁止</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul><h2 id="小程序和h5都有的问题"><a href="#小程序和h5都有的问题" class="headerlink" title="小程序和h5都有的问题"></a>小程序和h5都有的问题</h2><ul><li><p>时间转换问题<br><code>Date.parse(new Date(&#39;2020-09-24 12:00:00&#39;))</code><br>这行代码在安卓下输出<code>1522382400000</code>，在ios下输出NaN，ios中要用YYYY/MM/DD的形式，通用代码：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatTimeStamp</span> (<span class="params">time</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Date</span>.parse(<span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'2018/03/30 12:00:00'</span>)) || <span class="built_in">Date</span>.parse(<span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'2018-03-30 12:00:00'</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>移动端适配：微信最短屏750<em>1126，今日头条最短屏：750</em>1096</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;小程序&quot;&gt;&lt;a href=&quot;#小程序&quot; class=&quot;headerlink&quot; title=&quot;小程序&quot;&gt;&lt;/a&gt;小程序&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;showToast和showLoading是冲突的，会显示后设置的那一个&lt;/li&gt;
+&lt;li&gt;showLoading的时候
+      
+    
+    </summary>
+    
+      <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="小程序" scheme="https://amenging.netlify.com/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+      <category term="微信" scheme="https://amenging.netlify.com/tags/%E5%BE%AE%E4%BF%A1/"/>
+    
+  </entry>
   
   <entry>
     <title>限制字符长度和行数的文本框</title>
@@ -367,9 +396,9 @@
     
       <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="javascript" scheme="https://amenging.netlify.com/tags/javascript/"/>
-    
       <category term="前端" scheme="https://amenging.netlify.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="javascript" scheme="https://amenging.netlify.com/tags/javascript/"/>
     
   </entry>
   
@@ -393,9 +422,9 @@
     
       <category term="笔记" scheme="https://amenging.netlify.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="前端" scheme="https://amenging.netlify.com/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="css" scheme="https://amenging.netlify.com/tags/css/"/>
+    
+      <category term="前端" scheme="https://amenging.netlify.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -485,9 +514,9 @@
       <category term="技术" scheme="https://amenging.netlify.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="hexo" scheme="https://amenging.netlify.com/tags/hexo/"/>
-    
       <category term="git" scheme="https://amenging.netlify.com/tags/git/"/>
+    
+      <category term="hexo" scheme="https://amenging.netlify.com/tags/hexo/"/>
     
   </entry>
   
