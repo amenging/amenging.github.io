@@ -272,6 +272,22 @@
   
 
   
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: "https://amenging.netlify.com/about/index.html",
+  owner: 'amenging',
+  repo: 'amenging.github.io',
+  oauth: {
+    client_id: '679d6c946e2e540fa387',
+    client_secret: '40ab16fdb1d63a699fb326d16f04ab3605d6c786',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+  
 
 
           </div>
