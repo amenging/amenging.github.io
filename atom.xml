@@ -18,8 +18,8 @@
   
   <entry>
     <title>2020总结（未完）</title>
-    <link href="https://amenging.netlify.com/uncategorized/2020-summary/"/>
-    <id>https://amenging.netlify.com/uncategorized/2020-summary/</id>
+    <link href="https://amenging.netlify.com/2020-summary/"/>
+    <id>https://amenging.netlify.com/2020-summary/</id>
     <published>2020-12-17T03:54:03.000Z</published>
     <updated>2020-12-17T09:29:03.550Z</updated>
     
@@ -36,8 +36,8 @@
   
   <entry>
     <title>移动端开发问题总结（持续更新）</title>
-    <link href="https://amenging.netlify.com/tech/ios-andriod/"/>
-    <id>https://amenging.netlify.com/tech/ios-andriod/</id>
+    <link href="https://amenging.netlify.com/ios-andriod/"/>
+    <id>https://amenging.netlify.com/ios-andriod/</id>
     <published>2020-09-23T10:44:21.000Z</published>
     <updated>2020-12-17T10:28:29.871Z</updated>
     
@@ -60,8 +60,8 @@
   
   <entry>
     <title>限制字符长度和行数的文本框</title>
-    <link href="https://amenging.netlify.com/tech/textarea-line-width-limit/"/>
-    <id>https://amenging.netlify.com/tech/textarea-line-width-limit/</id>
+    <link href="https://amenging.netlify.com/textarea-line-width-limit/"/>
+    <id>https://amenging.netlify.com/textarea-line-width-limit/</id>
     <published>2020-08-07T08:07:42.000Z</published>
     <updated>2020-12-17T10:28:48.892Z</updated>
     
@@ -80,8 +80,8 @@
   
   <entry>
     <title>playcanvas学习总结</title>
-    <link href="https://amenging.netlify.com/tech/playcanvas-guide/"/>
-    <id>https://amenging.netlify.com/tech/playcanvas-guide/</id>
+    <link href="https://amenging.netlify.com/playcanvas-guide/"/>
+    <id>https://amenging.netlify.com/playcanvas-guide/</id>
     <published>2020-08-06T07:43:26.000Z</published>
     <updated>2020-12-17T10:28:39.262Z</updated>
     
@@ -104,8 +104,8 @@
   
   <entry>
     <title>vue+krpano的基本使用和小行星效果</title>
-    <link href="https://amenging.netlify.com/tech/vue-krpano/"/>
-    <id>https://amenging.netlify.com/tech/vue-krpano/</id>
+    <link href="https://amenging.netlify.com/vue-krpano/"/>
+    <id>https://amenging.netlify.com/vue-krpano/</id>
     <published>2020-05-21T04:02:20.000Z</published>
     <updated>2020-12-17T10:28:58.911Z</updated>
     
@@ -126,8 +126,8 @@
   
   <entry>
     <title>threejs相机跟随+曲线运动</title>
-    <link href="https://amenging.netlify.com/tech/one-three-project/"/>
-    <id>https://amenging.netlify.com/tech/one-three-project/</id>
+    <link href="https://amenging.netlify.com/one-three-project/"/>
+    <id>https://amenging.netlify.com/one-three-project/</id>
     <published>2020-05-20T09:03:08.000Z</published>
     <updated>2020-12-17T10:28:36.201Z</updated>
     
@@ -151,8 +151,8 @@
   
   <entry>
     <title>threejs模型闪烁问题</title>
-    <link href="https://amenging.netlify.com/tech/threejs-model-flickering/"/>
-    <id>https://amenging.netlify.com/tech/threejs-model-flickering/</id>
+    <link href="https://amenging.netlify.com/threejs-model-flickering/"/>
+    <id>https://amenging.netlify.com/threejs-model-flickering/</id>
     <published>2020-04-27T04:31:51.000Z</published>
     <updated>2020-12-17T10:28:51.862Z</updated>
     
@@ -176,8 +176,8 @@
   
   <entry>
     <title>2019总结</title>
-    <link href="https://amenging.netlify.com/%E9%9A%8F%E7%AC%94/2019-summary/"/>
-    <id>https://amenging.netlify.com/随笔/2019-summary/</id>
+    <link href="https://amenging.netlify.com/2019-summary/"/>
+    <id>https://amenging.netlify.com/2019-summary/</id>
     <published>2020-01-07T15:48:30.000Z</published>
     <updated>2020-12-17T03:51:34.290Z</updated>
     
@@ -196,8 +196,8 @@
   
   <entry>
     <title>mongodb使用用户名密码登录</title>
-    <link href="https://amenging.netlify.com/tech/mongodb-user-manage/"/>
-    <id>https://amenging.netlify.com/tech/mongodb-user-manage/</id>
+    <link href="https://amenging.netlify.com/mongodb-user-manage/"/>
+    <id>https://amenging.netlify.com/mongodb-user-manage/</id>
     <published>2019-03-27T02:42:17.000Z</published>
     <updated>2020-12-17T10:28:33.014Z</updated>
     
@@ -218,8 +218,8 @@
   
   <entry>
     <title>ae解析摄像机第二步卡住问题</title>
-    <link href="https://amenging.netlify.com/software/ae-solving-camera/"/>
-    <id>https://amenging.netlify.com/software/ae-solving-camera/</id>
+    <link href="https://amenging.netlify.com/ae-solving-camera/"/>
+    <id>https://amenging.netlify.com/ae-solving-camera/</id>
     <published>2018-10-23T06:59:52.000Z</published>
     <updated>2020-12-17T10:28:00.272Z</updated>
     
@@ -244,8 +244,8 @@
   
   <entry>
     <title>快捷键映射</title>
-    <link href="https://amenging.netlify.com/tech/capstoesc/"/>
-    <id>https://amenging.netlify.com/tech/capstoesc/</id>
+    <link href="https://amenging.netlify.com/capstoesc/"/>
+    <id>https://amenging.netlify.com/capstoesc/</id>
     <published>2018-09-20T12:19:52.000Z</published>
     <updated>2020-12-17T10:28:07.119Z</updated>
     
@@ -268,8 +268,8 @@
   
   <entry>
     <title>兴趣使然的TODO应用</title>
-    <link href="https://amenging.netlify.com/tech/todo/"/>
-    <id>https://amenging.netlify.com/tech/todo/</id>
+    <link href="https://amenging.netlify.com/todo/"/>
+    <id>https://amenging.netlify.com/todo/</id>
     <published>2018-08-23T04:26:53.000Z</published>
     <updated>2020-12-17T10:28:55.341Z</updated>
     
@@ -296,8 +296,8 @@
   
   <entry>
     <title>ftp相关问题</title>
-    <link href="https://amenging.netlify.com/tech/ftp/"/>
-    <id>https://amenging.netlify.com/tech/ftp/</id>
+    <link href="https://amenging.netlify.com/ftp/"/>
+    <id>https://amenging.netlify.com/ftp/</id>
     <published>2018-08-16T01:27:48.000Z</published>
     <updated>2020-12-17T10:28:13.370Z</updated>
     
@@ -320,8 +320,8 @@
   
   <entry>
     <title>谷歌浏览器workspace</title>
-    <link href="https://amenging.netlify.com/tech/workspace/"/>
-    <id>https://amenging.netlify.com/tech/workspace/</id>
+    <link href="https://amenging.netlify.com/workspace/"/>
+    <id>https://amenging.netlify.com/workspace/</id>
     <published>2018-08-11T07:01:55.000Z</published>
     <updated>2020-12-17T10:29:01.811Z</updated>
     
@@ -342,8 +342,8 @@
   
   <entry>
     <title>简单记录xx-net爬墙过程</title>
-    <link href="https://amenging.netlify.com/tech/xx-net/"/>
-    <id>https://amenging.netlify.com/tech/xx-net/</id>
+    <link href="https://amenging.netlify.com/xx-net/"/>
+    <id>https://amenging.netlify.com/xx-net/</id>
     <published>2018-08-01T01:25:30.000Z</published>
     <updated>2020-12-17T10:29:05.945Z</updated>
     
@@ -364,8 +364,8 @@
   
   <entry>
     <title>中缀表达式转逆波兰式</title>
-    <link href="https://amenging.netlify.com/tech/polish/"/>
-    <id>https://amenging.netlify.com/tech/polish/</id>
+    <link href="https://amenging.netlify.com/polish/"/>
+    <id>https://amenging.netlify.com/polish/</id>
     <published>2018-07-31T12:32:37.000Z</published>
     <updated>2020-12-17T10:28:41.820Z</updated>
     
@@ -390,8 +390,8 @@
   
   <entry>
     <title>css笔记</title>
-    <link href="https://amenging.netlify.com/tech/css-skill/"/>
-    <id>https://amenging.netlify.com/tech/css-skill/</id>
+    <link href="https://amenging.netlify.com/css-skill/"/>
+    <id>https://amenging.netlify.com/css-skill/</id>
     <published>2018-07-30T08:59:23.000Z</published>
     <updated>2020-12-17T10:28:09.919Z</updated>
     
@@ -418,8 +418,8 @@
   
   <entry>
     <title>ubuntu虚拟机实现端口映射</title>
-    <link href="https://amenging.netlify.com/tech/port/"/>
-    <id>https://amenging.netlify.com/tech/port/</id>
+    <link href="https://amenging.netlify.com/port/"/>
+    <id>https://amenging.netlify.com/port/</id>
     <published>2018-07-30T08:37:19.000Z</published>
     <updated>2020-12-17T10:28:45.139Z</updated>
     
@@ -441,31 +441,9 @@
   </entry>
   
   <entry>
-    <title>windows环境下搭建gitblit</title>
-    <link href="https://amenging.netlify.com/tech/gitblit/"/>
-    <id>https://amenging.netlify.com/tech/gitblit/</id>
-    <published>2018-07-30T08:01:25.000Z</published>
-    <updated>2020-12-17T10:28:16.398Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://www.cnblogs.com/amenging/p/7944504.html" target="_blank" rel="noopener">[老物搬运有修改]</a></p><a id="more"></a><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="下载java1-8-1"><a href="#下载java1-8-1" class="headerlink" title="下载java1.8.1"></a>下载java1.8.1</h3><p><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p><p>先装了java9，启动gitblit.cmd报错，又换成了1.8.1的jdk， 报错如下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java.lang.ClassCastException: java.base/jdk.internal.loader.ClassLoaders<span class="variable">$AppClassLoader</span> cannot be cast to java.base/java.net.URLClassLoader</span><br><span class="line">at org.moxie.MxLauncher.addJarFile(MxLauncher.java:170)</span><br><span class="line">at org.moxie.MxLauncher.main(MxLauncher.java:117)</span><br></pre></td></tr></table></figure><h3 id="下载gitblit（1-8-0）"><a href="#下载gitblit（1-8-0）" class="headerlink" title="下载gitblit（1.8.0）"></a>下载gitblit（1.8.0）</h3><p><a href="http://gitblit.com/" target="_blank" rel="noopener">http://gitblit.com/</a></p><h3 id="配置java环境变量"><a href="#配置java环境变量" class="headerlink" title="配置java环境变量"></a>配置java环境变量</h3><p>这个网上很多就不写啦， 配置好后命令行运行<code>java</code>和<code>javac</code>都可以就没问题啦</p><h2 id="配置运行"><a href="#配置运行" class="headerlink" title="配置运行"></a>配置运行</h2><h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>配置文件在gitblit安装目录下：<code>data/defaults.propoerties</code>，参考<a href="http://blog.csdn.net/hbtflying/article/details/52318691?locationNum=14" target="_blank" rel="noopener">这篇博客</a></p><p>主要修改的是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git.repositoriesFolder = git仓库目录(如d:<span class="regexp">/githubFolder)</span></span><br><span class="line"><span class="regexp">server.httpPort = http协议端口号</span></span><br><span class="line"><span class="regexp">server.httpBindInterface = 服务器ip地址</span></span><br></pre></td></tr></table></figure></p><h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>启动gitblit目录下的gitblit.cmd即可运行，运行installService.cmd可将gitblit作为Windows服务启动；</p><p>如果运行错误，建议运行目录下gitblit-stop.cmd停止后再重启；</p><p>启动后在浏览器输入服务器ip和http端口可访问，默认用户名admin，密码admin：</p><p><img src="http://wx3.sinaimg.cn/mw690/005QPjztgy1fts2yz3o5tj30vv036q2v.jpg" alt=""></p><h3 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h3><p><img src="http://wx1.sinaimg.cn/mw690/005QPjztgy1fts2xnavvxj305808oglf.jpg" alt="创建版本库"></p><p>创建好之后可以看到可以用ssh也可以用http：</p><p><img src="http://wx2.sinaimg.cn/mw690/005QPjztgy1fts2xnlrozj30gl08ujrs.jpg" alt=""></p><h3 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h3><p>通过用户中心添加ssh key：<br><img src="http://wx1.sinaimg.cn/mw690/005QPjztgy1fts31jt4i2j30ht0f50t1.jpg" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      从零开始的gitblit服务器
-    
-    </summary>
-    
-      <category term="tech" scheme="https://amenging.netlify.com/categories/tech/"/>
-    
-    
-      <category term="gitblit" scheme="https://amenging.netlify.com/tags/gitblit/"/>
-    
-  </entry>
-  
-  <entry>
     <title>git多用户管理</title>
-    <link href="https://amenging.netlify.com/tech/gitusers/"/>
-    <id>https://amenging.netlify.com/tech/gitusers/</id>
+    <link href="https://amenging.netlify.com/gitusers/"/>
+    <id>https://amenging.netlify.com/gitusers/</id>
     <published>2018-07-30T08:01:25.000Z</published>
     <updated>2020-12-17T10:28:19.589Z</updated>
     
@@ -482,6 +460,28 @@
     
     
       <category term="git" scheme="https://amenging.netlify.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>windows环境下搭建gitblit</title>
+    <link href="https://amenging.netlify.com/gitblit/"/>
+    <id>https://amenging.netlify.com/gitblit/</id>
+    <published>2018-07-30T08:01:25.000Z</published>
+    <updated>2020-12-17T10:28:16.398Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.cnblogs.com/amenging/p/7944504.html" target="_blank" rel="noopener">[老物搬运有修改]</a></p><a id="more"></a><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="下载java1-8-1"><a href="#下载java1-8-1" class="headerlink" title="下载java1.8.1"></a>下载java1.8.1</h3><p><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p><p>先装了java9，启动gitblit.cmd报错，又换成了1.8.1的jdk， 报错如下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java.lang.ClassCastException: java.base/jdk.internal.loader.ClassLoaders<span class="variable">$AppClassLoader</span> cannot be cast to java.base/java.net.URLClassLoader</span><br><span class="line">at org.moxie.MxLauncher.addJarFile(MxLauncher.java:170)</span><br><span class="line">at org.moxie.MxLauncher.main(MxLauncher.java:117)</span><br></pre></td></tr></table></figure><h3 id="下载gitblit（1-8-0）"><a href="#下载gitblit（1-8-0）" class="headerlink" title="下载gitblit（1.8.0）"></a>下载gitblit（1.8.0）</h3><p><a href="http://gitblit.com/" target="_blank" rel="noopener">http://gitblit.com/</a></p><h3 id="配置java环境变量"><a href="#配置java环境变量" class="headerlink" title="配置java环境变量"></a>配置java环境变量</h3><p>这个网上很多就不写啦， 配置好后命令行运行<code>java</code>和<code>javac</code>都可以就没问题啦</p><h2 id="配置运行"><a href="#配置运行" class="headerlink" title="配置运行"></a>配置运行</h2><h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>配置文件在gitblit安装目录下：<code>data/defaults.propoerties</code>，参考<a href="http://blog.csdn.net/hbtflying/article/details/52318691?locationNum=14" target="_blank" rel="noopener">这篇博客</a></p><p>主要修改的是<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git.repositoriesFolder = git仓库目录(如d:<span class="regexp">/githubFolder)</span></span><br><span class="line"><span class="regexp">server.httpPort = http协议端口号</span></span><br><span class="line"><span class="regexp">server.httpBindInterface = 服务器ip地址</span></span><br></pre></td></tr></table></figure></p><h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>启动gitblit目录下的gitblit.cmd即可运行，运行installService.cmd可将gitblit作为Windows服务启动；</p><p>如果运行错误，建议运行目录下gitblit-stop.cmd停止后再重启；</p><p>启动后在浏览器输入服务器ip和http端口可访问，默认用户名admin，密码admin：</p><p><img src="http://wx3.sinaimg.cn/mw690/005QPjztgy1fts2yz3o5tj30vv036q2v.jpg" alt=""></p><h3 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h3><p><img src="http://wx1.sinaimg.cn/mw690/005QPjztgy1fts2xnavvxj305808oglf.jpg" alt="创建版本库"></p><p>创建好之后可以看到可以用ssh也可以用http：</p><p><img src="http://wx2.sinaimg.cn/mw690/005QPjztgy1fts2xnlrozj30gl08ujrs.jpg" alt=""></p><h3 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h3><p>通过用户中心添加ssh key：<br><img src="http://wx1.sinaimg.cn/mw690/005QPjztgy1fts31jt4i2j30ht0f50t1.jpg" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      从零开始的gitblit服务器
+    
+    </summary>
+    
+      <category term="tech" scheme="https://amenging.netlify.com/categories/tech/"/>
+    
+    
+      <category term="gitblit" scheme="https://amenging.netlify.com/tags/gitblit/"/>
     
   </entry>
   
