@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Ameng">
 <meta property="og:description" content="做了一个全景的项目，接触到krpano，">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-12-17T10:28:58.911Z">
+<meta property="og:updated_time" content="2021-01-14T10:13:11.785Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue+krpano的基本使用和小行星效果">
 <meta name="twitter:description" content="做了一个全景的项目，接触到krpano，">
@@ -176,7 +176,8 @@
 <p>项目框架：<code>vue</code>+<code>typescript</code></p>
 </blockquote>
 <p><a href="https://img.amenging.top/video/pano-demo.mp4" target="_blank" rel="noopener">最终效果视频</a><br><a href="https://idea.elloworld.cn/reo/index.html" target="_blank" rel="noopener">线上地址</a></p>
-<h1 id="初始化krpano"><a href="#初始化krpano" class="headerlink" title="初始化krpano"></a>初始化krpano</h1><p>引入js：直接用script标签引入即可</p>
+<p><a href="http://www.krpano360.com/download-package/" target="_blank" rel="noopener">http://www.krpano360.com/download-package/</a></p>
+<h1 id="初始化krpano"><a href="#初始化krpano" class="headerlink" title="初始化krpano"></a>初始化krpano</h1><p>引入js：直接用script标签引入即可，在页面里创建一个div作为容器</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化</span></span><br><span class="line"><span class="keyword">let</span> embedpano: any = _window.embedpano <span class="comment">// ts没法直接调用，得转一下</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> krpano: any</span><br><span class="line"></span><br><span class="line">embedpano(&#123;</span><br><span class="line">  swf: <span class="literal">null</span>,</span><br><span class="line">  id: panoId, <span class="comment">// 提供的id，最后生成的canvas会使用这个id</span></span><br><span class="line">  xml: <span class="string">'./imgs/scene/pano.xml'</span>, <span class="comment">// xml配置文件</span></span><br><span class="line">  target: <span class="string">'pano'</span>, <span class="comment">// 页面里的div id</span></span><br><span class="line">  consolelog: <span class="literal">false</span>,</span><br><span class="line">  onready: <span class="function">(<span class="params">krpano_interface: any</span>) =&gt;</span> &#123;</span><br><span class="line">    krpano = krpano_interface</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <h1 id="xml配置文件说明"><a href="#xml配置文件说明" class="headerlink" title="xml配置文件说明"></a>xml配置文件说明</h1><p>krpano的场景及效果都配置在xml里面，平时没怎么接触这种配置格式，不过弄清楚里面的逻辑和规则理解起来就很简单啦</p>
 <h2 id="配置场景"><a href="#配置场景" class="headerlink" title="配置场景"></a>配置场景</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 首先是根元素krpano，其他元素都写在根元素里 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">krpano</span> <span class="attr">debugmode</span>=<span class="string">"false"</span> <span class="attr">logkey</span>=<span class="string">"false"</span> <span class="attr">showerrors</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- scene代表场景，设置名称可以在切换场景时使用 --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">scene</span> <span class="attr">name</span>=<span class="string">"street1"</span> <span class="attr">lat</span>=<span class="string">"0"</span> <span class="attr">lng</span>=<span class="string">"0"</span> <span class="attr">heading</span>=<span class="string">"0.0"</span>&gt;</span></span><br><span class="line"> <span class="comment">&lt;!-- view用来设置当前的视角 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">hlookat</span>=<span class="string">"0"</span> <span class="attr">vlookat</span>=<span class="string">"0"</span> <span class="attr">vlookatmin</span>=<span class="string">"-50"</span> <span class="attr">vlookatmax</span>=<span class="string">"41"</span> <span class="attr">fovtype</span>=<span class="string">"MFOV"</span> <span class="attr">fov</span>=<span class="string">"120"</span> <span class="attr">fovmin</span>=<span class="string">"80.5"</span> <span class="attr">fovmax</span>=<span class="string">"120"</span> <span class="attr">limitview</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- preview设置预览图，可以在图片加载完成之前做一个过渡 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">preview</span> <span class="attr">url</span>=<span class="string">"panos/street1/preview.jpg"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- cube就是设置全景图的切图，其中路径里面的``%s``是一个占位符，只要路径里面的图片名称按krpano的规则来写，它就能自动获取到图片 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">image</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">cube</span> <span class="attr">url</span>=<span class="string">"panos/street1/street1_%s.jpg"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">scene</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">scene</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">krpano</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -184,7 +185,7 @@
 <h2 id="获取点位"><a href="#获取点位" class="headerlink" title="获取点位"></a>获取点位</h2><p>在设置热点的时候，获取热点坐标的必须的，为了更方便地获取坐标，可以在全景图上定一个可以拖动的点位，获取它当前的坐标；<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 拖拽事件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"draghotspot"</span>&gt;</span></span><br><span class="line">  spheretoscreen(ath, atv, hotspotcenterx, hotspotcentery, calc(mouse.stagex LT stagewidth/2 ? 'l' : 'r'));</span><br><span class="line">  sub(drag_adjustx, mouse.stagex, hotspotcenterx);</span><br><span class="line">  sub(drag_adjusty, mouse.stagey, hotspotcentery);</span><br><span class="line">  asyncloop(pressed,</span><br><span class="line">    sub(dx, mouse.stagex, drag_adjustx);</span><br><span class="line">    sub(dy, mouse.stagey, drag_adjusty);</span><br><span class="line">    screentosphere(dx, dy, ath, atv);</span><br><span class="line">    print_hotspot_pos();</span><br><span class="line">    );</span><br><span class="line"><span class="tag">&lt;/<span class="name">action</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">scene</span> <span class="attr">name</span>=<span class="string">"street1"</span> <span class="attr">onstart</span>=<span class="string">""</span> <span class="attr">lat</span>=<span class="string">"0"</span> <span class="attr">lng</span>=<span class="string">"0"</span> <span class="attr">heading</span>=<span class="string">"0.0"</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">view</span> <span class="attr">hlookat</span>=<span class="string">"0"</span> <span class="attr">vlookat</span>=<span class="string">"0"</span> <span class="attr">vlookatmin</span>=<span class="string">"-50"</span> <span class="attr">vlookatmax</span>=<span class="string">"41"</span> <span class="attr">fovtype</span>=<span class="string">"MFOV"</span> <span class="attr">fov</span>=<span class="string">"120"</span> <span class="attr">fovmin</span>=<span class="string">"80.5"</span> <span class="attr">fovmax</span>=<span class="string">"120"</span> <span class="attr">limitview</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">preview</span> <span class="attr">url</span>=<span class="string">"panos/street1/preview.jpg"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- 下面这两段设置插件和插入热点，注意插件的代码要写在场景内部 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">name</span>=<span class="string">"hotspot_pos_info"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">type</span>=<span class="string">"text"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">html</span>=<span class="string">"drag the hotspots..."</span></span></span><br><span class="line"><span class="tag">    <span class="attr">css</span>=<span class="string">"font-family:Courier;font-size: 25px;"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">padding</span>=<span class="string">"8"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">align</span>=<span class="string">"lefttop"</span> <span class="attr">x</span>=<span class="string">"10"</span> <span class="attr">y</span>=<span class="string">"10"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">width</span>=<span class="string">"600"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">height</span>=<span class="string">"200"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">enabled</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag">    /&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">hotspot</span> <span class="attr">name</span>=<span class="string">"spot100"</span> <span class="attr">url</span>=<span class="string">"hotspot.png"</span> <span class="attr">distorted</span>=<span class="string">"true"</span> <span class="attr">scale</span>=<span class="string">"0.5"</span> <span class="attr">ath</span>=<span class="string">"+25"</span> <span class="attr">atv</span>=<span class="string">"+5"</span>  <span class="attr">ondown</span>=<span class="string">"draghotspot();"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">image</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">cube</span> <span class="attr">url</span>=<span class="string">"panos/street1/street1_%s.jpg"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">scene</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <h1 id="js与krpano的通信"><a href="#js与krpano的通信" class="headerlink" title="js与krpano的通信"></a>js与krpano的通信</h1><h2 id="krpano调用js"><a href="#krpano调用js" class="headerlink" title="krpano调用js"></a>krpano调用js</h2><p>在标签上绑定事件调用jscall即可，如<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hotspot</span></span></span><br><span class="line"><span class="tag">  <span class="attr">onclick</span>=<span class="string">"jscall(fn())"</span>  /&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>在vue+ts里面，需要将事件绑定在window上<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> _window: any = <span class="built_in">window</span></span><br><span class="line"></span><br><span class="line">_window.fn = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="js执行krpano方法"><a href="#js执行krpano方法" class="headerlink" title="js执行krpano方法"></a>js执行krpano方法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// call里面写对应的krpano方法，这里的krpano是初始化时给krpano对象的命名</span></span><br><span class="line">krpano.call(<span class="string">'lookat(180, 14.11, 109.8);'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="js执行krpano方法"><a href="#js执行krpano方法" class="headerlink" title="js执行krpano方法"></a>js执行krpano方法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// call里面写对应的krpano方法，这里的krpano是初始化时给krpano对象的命名</span></span><br><span class="line">krpano.call(<span class="string">'get(view.vlook);'</span>)</span><br></pre></td></tr></table></figure>
       
 
       
@@ -379,7 +380,7 @@ gitment.render('gitment-ctn')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 Ameng
+    		&copy; 2021 Ameng
     	</div>
       	<div class="footer-right">
 
@@ -456,11 +457,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">ae</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vim</a>
+                <a href="javascript:void(0)" class="js-tag color4">ftp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">gitblit</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -472,19 +489,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ftp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">gitblit</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -500,19 +505,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">mongodb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color2">krpano</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
+                <a href="javascript:void(0)" class="js-tag color2">chrome</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -532,15 +537,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">krpano</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">chrome</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">xx-net</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ubuntu</a>
               </li>
              
               <li class="article-tag-list-item">
